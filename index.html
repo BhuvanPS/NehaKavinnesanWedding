@@ -14,7 +14,7 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
-  body{background:var(--cr);color:var(--tx);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+  body{background:var(--cr);color:var(--tx);font-family:'Cormorant Garamond',serif;overflow-x:hidden;max-width:100vw}
   ::-webkit-scrollbar{width:6px}
   ::-webkit-scrollbar-track{background:var(--pb)}
   ::-webkit-scrollbar-thumb{background:var(--pd);border-radius:3px}
@@ -297,11 +297,12 @@
     /* Hero */
     #hero{padding:100px 16px 80px}
     .om{font-size:30px}
-    .hero-tag{font-size:10px;letter-spacing:3px}
+    .hero-tag{font-size:10px;letter-spacing:0.5px;text-align:center;max-width:90vw;white-space:normal}
+    .hero-date{font-size:10px;letter-spacing:1.5px}
     .hdivider{margin:18px 0}
-    .hdivider::before,.hdivider::after{width:50px}
-    .hero-sub{font-size:14px}
-    .hero-tamil{font-size:13px}
+    .hdivider::before,.hdivider::after{width:40px}
+    .hero-sub{font-size:13px;text-align:center;max-width:90vw}
+    .hero-tamil{font-size:12px;padding:0 8px}
     .scroll-hint{bottom:16px}
 
     /* Countdown */
