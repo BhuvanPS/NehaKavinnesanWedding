@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neha Sri & Kavinnesan – Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Latha&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pd: #c0395a; --pm: #e05c7a; --pl: #f2a3b3;
+    --pb: #fdf0f3; --pp: #fce8ed;
+    --go: #c9903a; --gl: #e8c27a;
+    --cr: #fffaf5; --dk: #2a1215; --tx: #3d1a22;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--cr);color:var(--tx);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
+  ::-webkit-scrollbar{width:6px}
+  ::-webkit-scrollbar-track{background:var(--pb)}
+  ::-webkit-scrollbar-thumb{background:var(--pd);border-radius:3px}
+
+  #petal-canvas{position:fixed;inset:0;pointer-events:none;z-index:999}
+
+  /* NAV */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    background:rgba(255,250,245,.95);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--gl);
+    padding:14px 40px;display:flex;justify-content:center;gap:40px;
+    animation:fadeDown .9s ease both;
+  }
+  nav a{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--pd);text-decoration:none;position:relative;transition:color .3s}
+  nav a::after{content:'';position:absolute;left:0;bottom:-3px;width:0;height:1px;background:var(--go);transition:width .3s}
+  nav a:hover{color:var(--go)}
+  nav a:hover::after{width:100%}
+
+  /* HERO */
+  #hero{
+    min-height:100vh;
+    background:radial-gradient(ellipse at 50% 55%,#fce4ec 0%,var(--pb) 55%,#fff8fb 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;padding:130px 20px 100px;
+  }
+
+  /* Kolam rings */
+  .kr{position:absolute;border-radius:50%;top:50%;left:50%;animation:spin linear infinite}
+  .kr:nth-child(1){width:700px;height:700px;margin:-350px 0 0 -350px;border:1px dashed rgba(201,144,58,.14);animation-duration:65s}
+  .kr:nth-child(2){width:530px;height:530px;margin:-265px 0 0 -265px;border:1px solid rgba(192,57,90,.1);animation-duration:48s;animation-direction:reverse}
+  .kr:nth-child(3){width:380px;height:380px;margin:-190px 0 0 -190px;border:1px solid rgba(201,144,58,.12);animation-duration:32s}
+  .kr:nth-child(4){width:230px;height:230px;margin:-115px 0 0 -115px;border:1px dotted rgba(192,57,90,.14);animation-duration:20s;animation-direction:reverse}
+
+  /* Temple arch */
+  .arch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:320px;height:200px;border:2px solid rgba(201,144,58,.2);border-bottom:none;border-radius:160px 160px 0 0;animation:archGlow 3s ease-in-out infinite}
+  .arch::after{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:280px;height:172px;border:1px solid rgba(201,144,58,.1);border-bottom:none;border-radius:140px 140px 0 0}
+
+  /* Floating diyas */
+  .diya{position:absolute;font-size:20px;opacity:.7;animation:floaty ease-in-out infinite}
+  .diya:nth-child(6) {left:5%;top:22%;animation-duration:4s;animation-delay:0s}
+  .diya:nth-child(7) {left:10%;top:60%;animation-duration:5.5s;animation-delay:1s}
+  .diya:nth-child(8) {right:7%;top:28%;animation-duration:4.8s;animation-delay:.5s}
+  .diya:nth-child(9) {right:4%;top:63%;animation-duration:3.8s;animation-delay:1.8s}
+  .diya:nth-child(10){left:20%;top:82%;animation-duration:5s;animation-delay:.3s}
+  .diya:nth-child(11){right:20%;top:82%;animation-duration:4.2s;animation-delay:.9s}
+
+  /* Corner motifs */
+  .cm{position:absolute;width:110px;height:110px;opacity:.17}
+  .cm svg{width:100%;height:100%}
+  .cm.tl{top:70px;left:20px;animation:cmPulse 4s ease-in-out infinite}
+  .cm.tr{top:70px;right:20px;transform:scaleX(-1);animation:cmPulse 4s ease-in-out infinite .5s}
+  .cm.bl{bottom:20px;left:20px;transform:scaleY(-1);animation:cmPulse 4s ease-in-out infinite 1s}
+  .cm.br{bottom:20px;right:20px;transform:scale(-1);animation:cmPulse 4s ease-in-out infinite 1.5s}
+
+  .om{font-size:40px;color:var(--go);margin-bottom:18px;position:relative;z-index:2;animation:fadeUp 1s .4s both,omGlow 3s ease-in-out infinite 1.5s}
+  .hero-tag{font-size:12px;letter-spacing:5px;text-transform:uppercase;color:var(--pm);margin-bottom:20px;position:relative;z-index:2;animation:fadeUp 1s .6s both}
+
+  .hero-names{
+    font-family:'Cinzel Decorative',cursive;
+    font-size:clamp(26px,5.2vw,60px);color:var(--pd);
+    text-align:center;line-height:1.25;position:relative;z-index:2;
+    text-shadow:0 4px 28px rgba(192,57,90,.17);
+  }
+  .hero-names .bride{display:inline-block;animation:fadeUp 1.2s .8s both}
+  .hero-names .amp{display:block;font-family:'Playfair Display',serif;font-style:italic;font-weight:400;font-size:.48em;color:var(--go);margin:8px 0;animation:fadeUp 1s .9s both,goldFlicker 4s ease-in-out infinite 2s}
+  .hero-names .groom{display:inline-block;animation:fadeUp 1.2s 1s both}
+
+  .hdivider{display:flex;align-items:center;gap:16px;margin:26px 0;position:relative;z-index:2;animation:fadeUp 1s 1.2s both}
+  .hdivider::before{content:'';height:1px;width:90px;background:linear-gradient(to right,transparent,var(--go))}
+  .hdivider::after{content:'';height:1px;width:90px;background:linear-gradient(to left,transparent,var(--go))}
+  .hdivider span{color:var(--go);font-size:20px;animation:spinStar 8s linear infinite 2s;display:inline-block}
+
+  .hero-date{font-family:'Cinzel Decorative',cursive;font-size:clamp(11px,1.7vw,14px);color:var(--pd);letter-spacing:3px;position:relative;z-index:2;animation:fadeUp 1s 1.4s both}
+  .hero-sub{font-size:17px;font-style:italic;color:var(--pm);margin-top:10px;position:relative;z-index:2;animation:fadeUp 1s 1.6s both}
+
+  /* Tamil quote hero */
+  .hero-tamil{
+    font-size:15px;color:var(--go);margin-top:14px;letter-spacing:1px;
+    font-style:italic;position:relative;z-index:2;
+    animation:fadeUp 1s 1.8s both;text-align:center;
+  }
+  .hero-tamil small{display:block;font-size:12px;color:var(--pm);letter-spacing:2px;margin-top:4px;font-style:normal}
+
+  /* Countdown */
+  .countdown{display:flex;gap:18px;margin-top:32px;position:relative;z-index:2;animation:fadeUp 1s 2s both}
+  .cdb{text-align:center;background:rgba(255,255,255,.68);border:1px solid var(--gl);padding:14px 16px;min-width:66px;backdrop-filter:blur(6px)}
+  .cdn{font-family:'Cinzel Decorative',cursive;font-size:24px;color:var(--pd);line-height:1;transition:all .2s}
+  .cdl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--go);margin-top:4px}
+  .cdn.flip{animation:numFlip .3s ease}
+
+  .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--pm);font-size:10px;letter-spacing:3px;text-transform:uppercase;animation:fadeUp 1s 2.3s both;z-index:2}
+  .scroll-hint::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,var(--pm),transparent);animation:scrollPulse 2s ease-in-out infinite}
+
+  /* SECTIONS */
+  section{padding:100px 20px}
+  .si{max-width:940px;margin:0 auto}
+  .sh{text-align:center;margin-bottom:64px}
+  .sey{font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--go);margin-bottom:14px}
+  .sti{font-family:'Cinzel Decorative',cursive;font-size:clamp(22px,4vw,36px);color:var(--pd);line-height:1.3}
+  .srl{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+  .srl::before,.srl::after{content:'';height:1px;width:70px;background:var(--gl)}
+  .srl span{color:var(--go);font-size:16px}
+
+  /* TAMIL QUOTE BAND */
+  .tamil-band{
+    background:linear-gradient(135deg,var(--pd) 0%,#a02848 50%,var(--pd) 100%);
+    padding:50px 20px;text-align:center;position:relative;overflow:hidden;
+  }
+  .tamil-band::before,.tamil-band::after{
+    content:'❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋';
+    position:absolute;left:0;right:0;color:rgba(255,255,255,.15);
+    font-size:16px;letter-spacing:10px;
+  }
+  .tamil-band::before{top:12px}
+  .tamil-band::after{bottom:12px}
+  .tq-main{
+    font-size:clamp(20px,3.5vw,30px);color:#fff;
+    letter-spacing:.5px;margin-bottom:12px;
+    text-shadow:0 2px 12px rgba(0,0,0,.2);
+    animation:goldFlicker 6s ease-in-out infinite;
+    font-weight:300;
+  }
+  .tq-trans{font-size:15px;color:rgba(255,255,255,.75);font-style:italic;letter-spacing:1px;margin-bottom:6px}
+  .tq-source{font-size:12px;color:rgba(255,200,120,.8);letter-spacing:3px;text-transform:uppercase}
+
+  /* STORY */
+  #story{background:var(--cr);position:relative}
+  #story::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,var(--gl),var(--pl),var(--gl),transparent)}
+
+  .story-grid{display:grid;grid-template-columns:1fr 2px 1fr}
+  .ss{padding:0 44px}
+  .ss.r{text-align:right}
+  .sdl{background:linear-gradient(to bottom,transparent,var(--gl) 30%,var(--gl) 70%,transparent);width:2px;position:relative}
+  .sdl::before{content:'❋';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--go);font-size:18px;background:var(--cr);padding:6px 0}
+  .sb{margin-bottom:44px}
+  .sbl{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--go);margin-bottom:8px}
+  .sbn{font-family:'Cinzel Decorative',cursive;font-size:17px;color:var(--pd);margin-bottom:12px}
+  .sbt{font-size:16px;line-height:1.85;color:var(--tx);font-style:italic}
+
+  /* Story Tamil quote */
+  .story-tquote{
+    text-align:center;padding:14px 24px;margin:20px 0;
+    border-left:3px solid var(--go);border-right:3px solid var(--go);
+    background:linear-gradient(to right,var(--pp),rgba(248,235,238,0));
+    font-size:15px;color:var(--go);letter-spacing:.5px;
+  }
+  .ss.r .story-tquote{background:linear-gradient(to left,var(--pp),rgba(248,235,238,0));border-left:none;border-right:3px solid var(--go)}
+  .story-tquote small{display:block;font-size:12px;color:var(--pm);font-style:italic;margin-top:4px}
+
+  .scon{text-align:center;padding:50px 0 10px;font-family:'Playfair Display',serif;font-style:italic;font-size:21px;color:var(--pm);animation:goldFlicker 5s ease-in-out infinite}
+
+  /* EVENTS — single unified list */
+  #events{background:var(--pp);position:relative;overflow:hidden}
+  #events::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--pd),var(--go),var(--pm),var(--go),var(--pd));background-size:200%;animation:gradSlide 4s linear infinite}
+
+  .events-timeline{display:flex;flex-direction:column;gap:0;position:relative}
+  .events-timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--gl) 10%,var(--gl) 90%,transparent);transform:translateX(-50%)}
+
+  .et-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:center;margin-bottom:32px}
+  .et-item:nth-child(even) .et-content{grid-column:3;text-align:left}
+  .et-item:nth-child(even) .et-spacer{grid-column:1;order:-1}
+  .et-item:nth-child(even) .et-dot-col{grid-column:2}
+
+  .et-content{
+    background:var(--cr);border:1px solid var(--gl);
+    padding:28px 26px;position:relative;overflow:hidden;
+    transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .4s;
+  }
+  .et-content::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--pd),var(--go));transform:scaleX(0);transform-origin:left;transition:transform .4s}
+  .et-content::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.3) 50%,transparent 60%);transform:translateX(-100%);transition:transform .6s}
+  .et-content:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(192,57,90,.14)}
+  .et-content:hover::before{transform:scaleX(1)}
+  .et-content:hover::after{transform:translateX(100%)}
+
+  .et-dot-col{display:flex;justify-content:center;align-items:center;position:relative;z-index:2}
+  .et-dot{
+    width:44px;height:44px;border-radius:50%;
+    background:var(--pd);border:3px solid var(--cr);
+    box-shadow:0 0 0 3px var(--gl);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;animation:floaty 3s ease-in-out infinite;
+  }
+  .et-spacer{}
+
+  /* odd items: content left, spacer right */
+  .et-item:nth-child(odd) .et-content{grid-column:1;text-align:right}
+  .et-item:nth-child(odd) .et-dot-col{grid-column:2}
+  .et-item:nth-child(odd) .et-spacer{grid-column:3}
+
+  /* even items: spacer left, content right */
+  .et-item:nth-child(even) .et-content{grid-column:3;text-align:left}
+  .et-item:nth-child(even) .et-dot-col{grid-column:2}
+  .et-item:nth-child(even) .et-spacer{grid-column:1}
+
+  .et-day{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--go);margin-bottom:4px}
+  .et-name{font-family:'Cinzel Decorative',cursive;font-size:15px;color:var(--pd);margin-bottom:8px}
+  .et-time{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--go);margin-bottom:4px}
+  .et-venue{font-size:14px;font-style:italic;color:var(--pm);margin-bottom:10px}
+  .et-desc{font-size:14px;line-height:1.75;color:#6b3a46}
+
+  /* TAMIL QUOTE 2 */
+  .tq2{
+    background:var(--pb);border-top:1px solid var(--gl);border-bottom:1px solid var(--gl);
+    padding:48px 20px;text-align:center;
+  }
+  .tq2-text{font-size:clamp(18px,3vw,26px);color:var(--pd);margin-bottom:10px;font-weight:300;letter-spacing:.5px}
+  .tq2-trans{font-size:14px;font-style:italic;color:var(--pm);margin-bottom:6px}
+  .tq2-src{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--go)}
+
+  /* VENUE */
+  #venue{background:var(--cr)}
+  .venue-block{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .fb{text-align:center;color:var(--go);font-size:24px;letter-spacing:10px;margin-bottom:28px;opacity:.6;animation:goldFlicker 5s ease-in-out infinite}
+  .vname{font-family:'Cinzel Decorative',cursive;font-size:24px;color:var(--pd);margin-bottom:14px}
+  .vaddr{font-size:18px;line-height:1.9;font-style:italic;color:var(--tx);margin-bottom:24px}
+  .vrow{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;font-size:15px}
+  .vrow .icon{color:var(--go);flex-shrink:0;margin-top:2px}
+  .vbtn{display:inline-block;margin-top:24px;padding:14px 34px;background:var(--pd);color:#fff;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;text-decoration:none;border:2px solid var(--pd);position:relative;overflow:hidden;transition:border-color .3s}
+  .vbtn::before{content:'';position:absolute;inset:0;background:var(--go);transform:translateX(-100%);transition:transform .4s;z-index:0}
+  .vbtn:hover::before{transform:translateX(0)}
+  .vbtn:hover{border-color:var(--go)}
+  .vbtn span{position:relative;z-index:1}
+
+  .mandala-box{aspect-ratio:1;display:flex;align-items:center;justify-content:center;position:relative}
+  .mandala-svg{position:absolute;width:100%;height:100%;opacity:.12;animation:spin 25s linear infinite}
+  .map-inner{position:relative;z-index:2;background:var(--pb);border:2px solid var(--gl);width:82%;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:32px}
+  .map-inner::before{content:'';position:absolute;inset:10px;border:1px solid rgba(201,144,58,.3);pointer-events:none}
+  .map-pin{font-size:44px;animation:bouncePin 2s ease-in-out infinite}
+  .map-label{font-family:'Cinzel Decorative',cursive;font-size:13px;color:var(--pd);text-align:center}
+  .map-sub{font-size:13px;font-style:italic;color:var(--pm);text-align:center}
+  .map-det{margin-top:12px;font-size:12px;color:var(--pm);font-style:italic;text-align:center;line-height:2}
+
+  /* FOOTER */
+  footer{background:var(--dk);padding:70px 20px;text-align:center;position:relative;overflow:hidden}
+  footer::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,transparent,var(--go),var(--pl),var(--go),transparent)}
+  .fom{font-size:32px;color:var(--go);margin-bottom:16px;animation:omGlow 4s ease-in-out infinite}
+  .fnames{font-family:'Cinzel Decorative',cursive;font-size:22px;color:var(--gl);margin-bottom:10px}
+  .fsub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pl);margin-bottom:28px}
+  .fdiv{width:70px;height:1px;background:var(--go);margin:0 auto 24px}
+  .fnote{font-size:16px;font-style:italic;line-height:1.9;max-width:520px;margin:0 auto;color:rgba(255,255,255,.75)}
+  /* Footer Tamil quote */
+  .ftamil{
+    margin:28px auto 0;max-width:500px;
+    border:1px solid rgba(201,144,58,.3);padding:22px 28px;
+    background:rgba(255,255,255,.04);
+  }
+  .ftamil-q{font-size:18px;color:var(--gl);letter-spacing:.5px;margin-bottom:8px}
+  .ftamil-t{font-size:13px;color:rgba(255,255,255,.6);font-style:italic}
+  .fbot{margin-top:36px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22)}
+
+  /* REVEAL */
+  .rv      {opacity:0;transform:translateY(40px); transition:opacity .9s ease,transform .9s ease}
+  .rv-l    {opacity:0;transform:translateX(-50px);transition:opacity .9s ease,transform .9s ease}
+  .rv-r    {opacity:0;transform:translateX(50px); transition:opacity .9s ease,transform .9s ease}
+  .rv.on,.rv-l.on,.rv-r.on{opacity:1;transform:none}
+  .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.5s}
+
+  /* KEYFRAMES */
+  @keyframes fadeUp   {from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+  @keyframes fadeDown {from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
+  @keyframes spin     {from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes spinStar {from{transform:rotate(0)}to{transform:rotate(360deg)}}
+  @keyframes archGlow {0%,100%{box-shadow:0 0 0 rgba(201,144,58,0)}50%{box-shadow:0 0 22px rgba(201,144,58,.26)}}
+  @keyframes omGlow   {0%,100%{text-shadow:0 0 8px rgba(201,144,58,.3)}50%{text-shadow:0 0 30px rgba(201,144,58,.75)}}
+  @keyframes goldFlicker{0%,100%{opacity:1}50%{opacity:.72}}
+  @keyframes floaty   {0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes bouncePin{0%,100%{transform:translateY(0)}40%{transform:translateY(-16px)}60%{transform:translateY(-8px)}}
+  @keyframes cmPulse  {0%,100%{opacity:.17;transform:scale(1)}50%{opacity:.3;transform:scale(1.06)}}
+  @keyframes scrollPulse{0%,100%{opacity:0;transform:scaleY(0);transform-origin:top}50%{opacity:1;transform:scaleY(1)}}
+  @keyframes gradSlide{0%{background-position:0%}100%{background-position:200%}}
+  @keyframes numFlip  {0%{transform:translateY(-6px);opacity:.3}100%{transform:translateY(0);opacity:1}}
+
+  /* RESPONSIVE */
+  @media(max-width:750px){
+    /* Nav */
+    nav{gap:10px;padding:10px 14px;flex-wrap:wrap;justify-content:center}
+    nav a{font-size:10px;letter-spacing:1.5px}
+
+    /* Hero */
+    #hero{padding:100px 16px 80px}
+    .om{font-size:30px}
+    .hero-tag{font-size:10px;letter-spacing:3px}
+    .hdivider{margin:18px 0}
+    .hdivider::before,.hdivider::after{width:50px}
+    .hero-sub{font-size:14px}
+    .hero-tamil{font-size:13px}
+    .scroll-hint{bottom:16px}
+
+    /* Countdown */
+    .countdown{gap:8px;margin-top:22px;flex-wrap:wrap;justify-content:center}
+    .cdb{padding:10px 12px;min-width:54px}
+    .cdn{font-size:20px}
+    .cdl{font-size:8px}
+
+    /* Corner motifs */
+    .cm{display:none}
+
+    /* Sections */
+    section{padding:60px 16px}
+    .sh{margin-bottom:40px}
+    .sti{font-size:20px}
+
+    /* Story */
+    .story-grid{grid-template-columns:1fr}
+    .sdl{display:none}
+    .ss{padding:0}
+    .ss.r{text-align:left}
+    .sbt{font-size:14px}
+    .story-tquote{font-size:13px}
+
+    /* Tamil quote bands */
+    .tq-main{font-size:15px;letter-spacing:0}
+    .tq-trans{font-size:13px}
+    .tq2-text{font-size:16px}
+    .tq2-trans{font-size:13px}
+    .tamil-band{padding:36px 16px}
+
+    /* Events */
+    .events-timeline::before{left:18px}
+    .et-item{grid-template-columns:1fr 44px;gap:0}
+    .et-item:nth-child(odd) .et-content,
+    .et-item:nth-child(even) .et-content{grid-column:1;text-align:left}
+    .et-item:nth-child(odd) .et-dot-col,
+    .et-item:nth-child(even) .et-dot-col{grid-column:2}
+    .et-spacer{display:none}
+    .et-content{padding:18px 16px}
+    .et-name{font-size:13px}
+    .et-desc{font-size:13px}
+
+    /* Venue */
+    .venue-block{grid-template-columns:1fr}
+    .mandala-box{display:none}
+    .vname{font-size:20px}
+    .vaddr{font-size:15px}
+    .vbtn{padding:12px 24px;font-size:11px}
+
+    /* Footer */
+    footer{padding:50px 16px}
+    .fnames{font-size:18px}
+    .fnote{font-size:14px}
+    .ftamil{padding:16px 18px}
+    .ftamil-q{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+<canvas id="petal-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero">Home</a>
+  <a href="#story">Our Story</a>
+  <a href="#events">Events</a>
+  <a href="#venue">Venue</a>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="hero">
+  <div class="kr"></div><div class="kr"></div><div class="kr"></div><div class="kr"></div>
+  <div class="arch"></div>
+  <div class="diya">🪔</div><div class="diya">🪔</div><div class="diya">🪔</div>
+  <div class="diya">🪔</div><div class="diya">🌸</div><div class="diya">🌺</div>
+
+  <div class="cm tl"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5"/><path d="M36 90 Q36 36 90 36" stroke="#c9903a" stroke-width="1"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
+  <div class="cm tr"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
+  <div class="cm bl"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
+  <div class="cm br"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
+
+  <div class="om">ॐ</div>
+  <div class="hero-tag">இறைவன் அருளால் · With divine blessings</div>
+
+  <div class="hero-names">
+    <span class="bride">Neha Sri S R</span>
+    <span class="amp">&amp;</span>
+    <span class="groom">Kavinnesan V P</span>
+  </div>
+
+  <div class="hdivider"><span>✦</span></div>
+
+  <div class="hero-date">28th &amp; 29th May 2026</div>
+  <div class="hero-sub">Shri Sankar Mahal · Kunnathur, Tirupur</div>
+
+  <div class="hero-tamil">
+    "இரு உள்ளங்கள் ஒன்றாகும் நாள்"
+    <small>The day two hearts become one</small>
+  </div>
+
+  <div class="countdown">
+    <div class="cdb"><div class="cdn" id="cd-d">--</div><div class="cdl">Days</div></div>
+    <div class="cdb"><div class="cdn" id="cd-h">--</div><div class="cdl">Hours</div></div>
+    <div class="cdb"><div class="cdn" id="cd-m">--</div><div class="cdl">Mins</div></div>
+    <div class="cdb"><div class="cdn" id="cd-s">--</div><div class="cdl">Secs</div></div>
+  </div>
+
+  <div class="scroll-hint">Scroll</div>
+</section>
+
+<!-- ═══════════ TAMIL QUOTE BAND ═══════════ -->
+<div class="tamil-band">
+  <div class="tq-main">
+    "யானும் நீயும் எவ்வழி அறிதும் — செம்புலப் பெயல்நீர் போல அன்புடை நெஞ்சம் தாம் கலந்தனவே"
+  </div>
+  <div class="tq-trans">How have you and I known each other? Like rainwater merging into red earth, our loving hearts have become one.</div>
+  <div class="tq-source">Kurunthokai · Sangam Classical Poetry</div>
+</div>
+
+<!-- ═══════════ STORY ═══════════ -->
+<section id="story">
+  <div class="si">
+    <div class="sh rv">
+      <div class="sey">இரு உள்ளங்கள் · Two souls, one journey</div>
+      <div class="sti">Our Story</div>
+      <div class="srl"><span>❧</span></div>
+    </div>
+
+    <div class="story-grid">
+      <!-- BRIDE -->
+      <div class="ss rv-l">
+        <div class="sb">
+          <div class="sbl">The Bride</div>
+          <div class="sbn">Neha Sri S R</div>
+          <div class="sbt">
+            From the serene town of Sathyamangalam, nestled at the foothills of the Nilgiris, Neha Sri is a soul as genuine as the jasmine she adorns. A devoted classical dancer, her every movement tells a story — of devotion, of grace, of love given freely.
+          </div>
+        </div>
+        <div class="story-tquote">
+          "நடனமாடும் போது அவள் தெய்வமாகிறாள்"
+          <small>In her dance, she becomes divine</small>
+        </div>
+        <div class="sb" style="margin-top:24px">
+          <div class="sbl">Her Heart Says</div>
+          <div class="sbt">"He is steady, sincere, and home all at once. Love does not need grand gestures when it is this real."</div>
+        </div>
+      </div>
+
+      <div class="sdl"></div>
+
+      <!-- GROOM -->
+      <div class="ss r rv-r">
+        <div class="sb">
+          <div class="sbl">The Groom</div>
+          <div class="sbn">Kavinnesan V P</div>
+          <div class="sbt">
+            Born in Erode and now building dreams across the skyline of Sydney, Kavinnesan carries the pride of his construction family with quiet strength. He has built towers — but it is Neha Sri who has built a home in his heart.
+          </div>
+        </div>
+        <div class="story-tquote ss.r">
+          "கட்டிடம் கட்டலாம், ஆனால் காதலை கட்டுவது கடினம் — அவளால் அது எளிதானது"
+          <small>Buildings can be built, but love is hard to build — she made it easy</small>
+        </div>
+        <div class="sb" style="margin-top:24px">
+          <div class="sbl">His Heart Says</div>
+          <div class="sbt">"From Erode to Sydney, I have travelled far — but every road led me back to her. She is everything I never knew I was searching for."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scon rv">❝ Two families, two cities, one eternal promise ❞</div>
+  </div>
+</section>
+
+<!-- ═══════════ EVENTS ═══════════ -->
+<section id="events">
+  <div class="si">
+    <div class="sh rv">
+      <div class="sey">திருமண நிகழ்ச்சிகள் · Join us in celebration</div>
+      <div class="sti">Events &amp; Schedule</div>
+      <div class="srl"><span>❧</span></div>
+    </div>
+
+    <div class="events-timeline">
+
+      <!-- EVENT 1 -->
+      <div class="et-item rv d1">
+        <div class="et-content">
+          <div class="et-day">Day 1 · 28th May 2026</div>
+          <div class="et-name">Nalangu</div>
+          <div class="et-time">5:00 PM – 8:00 PM</div>
+          <div class="et-venue">Shri Sankar Mahal, Kunnathur</div>
+          <div class="et-desc">A joyous pre-wedding ritual filled with turmeric, sacred garlands, playful games, and warm blessings from elders. Dress code: yellow &amp; green.</div>
+        </div>
+        <div class="et-dot-col"><div class="et-dot">🪔</div></div>
+        <div class="et-spacer"></div>
+      </div>
+
+      <!-- EVENT 2 -->
+      <div class="et-item rv d2">
+        <div class="et-spacer"></div>
+        <div class="et-dot-col"><div class="et-dot" style="animation-delay:.4s">🌺</div></div>
+        <div class="et-content">
+          <div class="et-day">Day 1 · 28th May 2026</div>
+          <div class="et-name">Kolam &amp; Sangeet</div>
+          <div class="et-time">7:30 PM – 10:00 PM</div>
+          <div class="et-venue">Shri Sankar Mahal, Kunnathur</div>
+          <div class="et-desc">An enchanting evening of kolam art, folk music, and shared laughter as loved ones gather to celebrate the eve of the wedding.</div>
+        </div>
+      </div>
+
+      <!-- EVENT 3 -->
+      <div class="et-item rv d1">
+        <div class="et-content">
+          <div class="et-day">Day 2 · 29th May 2026</div>
+          <div class="et-name">Muhurtham</div>
+          <div class="et-time">7:00 AM – 10:30 AM</div>
+          <div class="et-venue">Shri Sankar Mahal, Kunnathur</div>
+          <div class="et-desc">The most sacred moment — the tying of the Thali under the auspicious Muhurtham, with Vedic chants, Oonjal, Nadaswaram, and the blessings of all.</div>
+        </div>
+        <div class="et-dot-col"><div class="et-dot" style="animation-delay:.8s">🌸</div></div>
+        <div class="et-spacer"></div>
+      </div>
+
+      <!-- EVENT 4 -->
+      <div class="et-item rv d2">
+        <div class="et-spacer"></div>
+        <div class="et-dot-col"><div class="et-dot" style="animation-delay:1.2s">🍛</div></div>
+        <div class="et-content">
+          <div class="et-day">Day 2 · 29th May 2026</div>
+          <div class="et-name">Wedding Feast</div>
+          <div class="et-time">11:00 AM – 2:00 PM</div>
+          <div class="et-venue">Shri Sankar Mahal, Kunnathur</div>
+          <div class="et-desc">A grand traditional feast on banana leaves — rasam, sambar, payasam, and every delicious flavour of Tamil culture and hospitality.</div>
+        </div>
+      </div>
+
+      <!-- EVENT 5 -->
+      <div class="et-item rv d3">
+        <div class="et-content">
+          <div class="et-day">Day 2 · 29th May 2026</div>
+          <div class="et-name">Reception</div>
+          <div class="et-time">6:00 PM – 10:00 PM</div>
+          <div class="et-venue">Shri Sankar Mahal, Kunnathur</div>
+          <div class="et-desc">A grand celebration with music, dance, and dinner — an evening of pure joy shared with all the family and dearest friends of the couple.</div>
+        </div>
+        <div class="et-dot-col"><div class="et-dot" style="animation-delay:1.6s">🎶</div></div>
+        <div class="et-spacer"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ TAMIL QUOTE 2 ═══════════ -->
+<div class="tq2 rv">
+  <div class="tq2-text">"காதல் என்பது இரு உயிர்களில் ஒரே ஆத்மா"</div>
+  <div class="tq2-trans">"Love is one soul inhabiting two bodies"</div>
+  <div class="tq2-src">— Tamil Proverb</div>
+</div>
+
+<!-- ═══════════ VENUE ═══════════ -->
+<section id="venue">
+  <div class="si">
+    <div class="sh rv">
+      <div class="sey">நடைபெறும் இடம் · Where love meets tradition</div>
+      <div class="sti">Venue &amp; Location</div>
+      <div class="srl"><span>❧</span></div>
+    </div>
+
+    <div class="venue-block">
+      <div class="rv-l">
+        <div class="fb">❋ ✿ ❋</div>
+        <div class="vname">Shri Sankar Mahal</div>
+        <div class="vaddr">Kunnathur,<br>Tirupur District,<br>Tamil Nadu, India</div>
+        <div class="vrow"><span class="icon">🕕</span><span>Gates open at <strong>6:00 AM</strong> on 29th May. Muhurtham at 7:00 AM.</span></div>
+        <div class="vrow"><span class="icon">🚗</span><span>Ample on-site parking. Easily accessible from Tirupur &amp; Erode.</span></div>
+        <div class="vrow"><span class="icon">👗</span><span>Dress code: Traditional South Indian attire — silks &amp; kanjivarams warmly welcomed!</span></div>
+        <div class="vrow"><span class="icon">📍</span><span>~25 km from Tirupur · ~35 km from Erode · ~30 km from Coimbatore Airport</span></div>
+        <a href="https://maps.google.com/?q=Kunnathur+Tirupur+Tamil+Nadu" target="_blank" class="vbtn"><span>Open in Google Maps ↗</span></a>
+      </div>
+
+      <div class="mandala-box rv-r">
+        <svg class="mandala-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(150,150)">
+            <circle r="140" fill="none" stroke="#c9903a" stroke-width="1"/>
+            <circle r="110" fill="none" stroke="#c0395a" stroke-width=".8"/>
+            <circle r="80"  fill="none" stroke="#c9903a" stroke-width="1.2"/>
+            <circle r="50"  fill="none" stroke="#c0395a" stroke-width=".8"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(45)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(90)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(135)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(180)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(225)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(270)"/>
+            <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(315)"/>
+            <g transform="rotate(22.5)">
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(45)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(90)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(135)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(180)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(225)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(270)"/>
+              <ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(315)"/>
+            </g>
+          </g>
+        </svg>
+        <div class="map-inner">
+          <div class="map-pin">📍</div>
+          <div class="map-label">Shri Sankar Mahal</div>
+          <div class="map-sub">Kunnathur, Tirupur</div>
+          <div class="map-det">✦ 25 km from Tirupur City<br>✦ 35 km from Erode<br>✦ 30 km from Coimbatore Airport</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="fom">ॐ</div>
+  <div class="fnames">Neha Sri &amp; Kavinnesan</div>
+  <div class="fsub">28th &amp; 29th May 2026 · Kunnathur, Tirupur</div>
+  <div class="fdiv"></div>
+  <div class="fnote">
+    We joyfully invite you to grace our wedding and seek your blessings as we step into this sacred new chapter together.
+    <br><br><span style="color:var(--gl)">🌸 வணக்கம் · Vanakkam 🌸</span>
+  </div>
+  <div class="ftamil">
+    <div class="ftamil-q">"மணமகள் மலர்ந்தால் மணமகன் மகிழ்வான்; இருவரும் சேர்ந்தால் குடும்பம் மலரும்"</div>
+    <div class="ftamil-t">When the bride blossoms, the groom rejoices; when both come together, the family flourishes</div>
+  </div>
+  <div class="fbot">Made with love · Neha Sri &amp; Kavinnesan · 2026</div>
+</footer>
+
+<script>
+/* ─── PETAL CANVAS ─── */
+const canvas = document.getElementById('petal-canvas');
+const ctx = canvas.getContext('2d');
+function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize(); window.addEventListener('resize', resize);
+
+const COLS = ['#f8aec0','#f4c2cd','#fce4ec','#e8967f','#ffb3c1','#ffd6e0','#e8c27a','#f9d4dc'];
+function mkPetal(init){
+  return {
+    x: Math.random() * window.innerWidth,
+    y: init ? Math.random() * window.innerHeight : -20,
+    sz: Math.random() * 12 + 5,
+    vy: Math.random() * 1.4 + 0.5,
+    vx: (Math.random() - .5) * .7,
+    rot: Math.random() * Math.PI * 2,
+    rs: (Math.random() - .5) * .05,
+    col: COLS[Math.floor(Math.random() * COLS.length)],
+    alpha: Math.random() * .5 + .28,
+    sway: Math.random() * 2,
+    swOff: Math.random() * Math.PI * 2,
+  };
+}
+const PETALS = Array.from({length:34}, () => mkPetal(true));
+let fr = 0;
+
+(function loop(){
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  fr++;
+  PETALS.forEach(p => {
+    p.y += p.vy;
+    p.x += p.vx + Math.sin(fr * .018 + p.swOff) * p.sway * .24;
+    p.rot += p.rs;
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.col;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, p.sz * .42, p.sz, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = p.alpha * .32;
+    ctx.fillStyle = '#fff';
+    ctx.beginPath();
+    ctx.ellipse(-p.sz * .08, -p.sz * .28, p.sz * .13, p.sz * .3, -.4, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    if(p.y > canvas.height + 30) Object.assign(p, mkPetal(false));
+  });
+  requestAnimationFrame(loop);
+})();
+
+/* ─── COUNTDOWN (FIXED) ─── */
+// Target: 28 May 2025 07:00 IST (UTC+5:30 = UTC 01:30)
+const TARGET = new Date('2026-05-28T01:30:00Z');
+const els = {d: document.getElementById('cd-d'), h: document.getElementById('cd-h'), m: document.getElementById('cd-m'), s: document.getElementById('cd-s')};
+const pad = n => String(Math.max(0, n)).padStart(2, '0');
+let prev = {d:'',h:'',m:'',s:''};
+
+function tick(){
+  const now = Date.now();
+  const diff = TARGET - now;
+  if(diff <= 0){
+    ['d','h','m','s'].forEach(k => { els[k].textContent = '00'; });
+    return;
+  }
+  const vals = {
+    d: pad(Math.floor(diff / 86400000)),
+    h: pad(Math.floor(diff % 86400000 / 3600000)),
+    m: pad(Math.floor(diff % 3600000 / 60000)),
+    s: pad(Math.floor(diff % 60000 / 1000)),
+  };
+  ['d','h','m','s'].forEach(k => {
+    if(vals[k] !== prev[k]){
+      els[k].textContent = vals[k];
+      els[k].classList.remove('flip');
+      void els[k].offsetWidth; // reflow
+      els[k].classList.add('flip');
+      prev[k] = vals[k];
+    }
+  });
+}
+setInterval(tick, 1000);
+tick();
+
+/* ─── SCROLL REVEAL ─── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('on'); obs.unobserve(e.target); } });
+}, { threshold: .1 });
+document.querySelectorAll('.rv,.rv-l,.rv-r').forEach(el => obs.observe(el));
+
+/* ─── NAV ACTIVE ─── */
+const secs = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if(window.scrollY >= s.offsetTop - 130) cur = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#'+cur ? 'var(--go)' : ''; });
+});
+</script>
+</body>
+</html>
