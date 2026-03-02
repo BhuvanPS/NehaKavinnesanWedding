@@ -1778,15 +1778,15 @@
         inset: 0;
         background:
           linear-gradient(180deg,
-            #3a0612 0%,
-            #6b102a 8%,
-            #8c1838 18%,
-            #a01e42 35%,
-            #8c1838 50%,
-            #a01e42 65%,
-            #8c1838 82%,
-            #6b102a 92%,
-            #3a0612 100%);
+            #2e0614 0%,
+            #6b1038 8%,
+            #8c1848 18%,
+            #a8205a 35%,
+            #8c1848 50%,
+            #a8205a 65%,
+            #8c1848 82%,
+            #6b1038 92%,
+            #2e0614 100%);
       }
       /* Silk fabric weave texture */
       .curtain-panel::after {
@@ -1853,13 +1853,13 @@
       }
       .curtain-left .curtain-border {
         right: 0;
-        border-right: 3px solid rgba(201,144,58,0.5);
-        box-shadow: -4px 0 20px rgba(201,144,58,0.1) inset;
+        border-right: 3px solid rgba(232,194,122,0.5);
+        box-shadow: -4px 0 20px rgba(168,32,90,0.15) inset;
       }
       .curtain-right .curtain-border {
         left: 0;
-        border-left: 3px solid rgba(201,144,58,0.5);
-        box-shadow: 4px 0 20px rgba(201,144,58,0.1) inset;
+        border-left: 3px solid rgba(232,194,122,0.5);
+        box-shadow: 4px 0 20px rgba(168,32,90,0.15) inset;
       }
 
       /* Zari motif overlay on panels */
@@ -1876,15 +1876,15 @@
           radial-gradient(ellipse 30px 45px at 50% 92%, rgba(201,144,58,0.6) 0%, transparent 70%);
       }
 
-      /* Silk shimmer */
+      /* Silk shimmer — pink tint for bride, blue tint for groom */
       .curtain-shimmer {
         position: absolute;
         inset: 0;
         background: linear-gradient(120deg,
           transparent 20%,
-          rgba(255,220,180,0.06) 35%,
-          rgba(232,194,122,0.09) 50%,
-          rgba(255,220,180,0.06) 65%,
+          rgba(255,180,200,0.07) 35%,
+          rgba(255,200,215,0.1) 50%,
+          rgba(255,180,200,0.07) 65%,
           transparent 80%
         );
         background-size: 200% 100%;
@@ -1908,7 +1908,7 @@
         justify-content: center;
         align-items: center;
         pointer-events: none;
-        background: linear-gradient(180deg, rgba(58,6,18,0.9) 0%, transparent 100%);
+        background: linear-gradient(180deg, rgba(40,10,30,0.9) 0%, transparent 100%);
       }
       .jasmine-strand {
         font-size: 16px;
@@ -2039,7 +2039,7 @@
         position: relative;
         width: 260px;
         height: 52px;
-        background: linear-gradient(135deg, rgba(58,6,18,0.95), rgba(100,14,38,0.95));
+        background: linear-gradient(135deg, rgba(140,24,80,0.9), rgba(92,16,53,0.9));
         border: 1.5px solid rgba(201,144,58,0.45);
         border-radius: 30px;
         display: flex;
@@ -2119,7 +2119,7 @@
         justify-content: center;
         align-items: center;
         pointer-events: none;
-        background: linear-gradient(0deg, rgba(58,6,18,0.9) 0%, transparent 100%);
+        background: linear-gradient(0deg, rgba(40,10,30,0.9) 0%, transparent 100%);
       }
 
       body.curtain-locked {
@@ -2703,7 +2703,7 @@
       });
 
       /* ─── MUSIC PLAYER ─── */
-      const audio = new Audio("_Vaseegara_Violin_Bgm_Ringtone_(by Fringster.com).mp3");
+      const audio = new Audio("vaseegara-bgm.mp3");
       audio.loop = true;
       const musicBtn = document.getElementById('music-btn');
       let isManualPause = false;
