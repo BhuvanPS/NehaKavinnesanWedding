@@ -2719,6 +2719,13 @@
         }
       }
 
+      // Fallback: any click/tap on the curtain overlay also unlocks audio
+      const curtainOverlayEl = document.getElementById('curtain-overlay');
+      if (curtainOverlayEl) {
+        curtainOverlayEl.addEventListener('click', startMusic);
+        curtainOverlayEl.addEventListener('touchend', startMusic);
+      }
+
       function toggleMusic() {
         if (audio.paused) {
           audio.play().catch(e => console.log("Interaction needed"));
@@ -2807,6 +2814,7 @@
         // Mouse events
         thumb.addEventListener('mousedown', (e) => {
           e.preventDefault();
+          startMusic(); // Direct call in user gesture
           onStart(e.clientX);
         });
         document.addEventListener('mousemove', (e) => onMove(e.clientX));
@@ -2815,6 +2823,7 @@
         // Touch events
         thumb.addEventListener('touchstart', (e) => {
           e.preventDefault();
+          startMusic(); // Direct call in user gesture
           onStart(e.touches[0].clientX);
         }, { passive: false });
         document.addEventListener('touchmove', (e) => {
