@@ -1691,9 +1691,591 @@
           width: 94%;
         }
       }
+      /* ── MUSIC CONTROL ── */
+      .music-control {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 2000;
+        width: 50px;
+        height: 50px;
+        background: var(--pd);
+        border: 2px solid var(--gl);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(192, 57, 90, 0.3);
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .music-control:hover {
+        transform: scale(1.1);
+        background: var(--pm);
+        box-shadow: 0 12px 30px rgba(192, 57, 90, 0.45);
+      }
+      .music-icon {
+        font-size: 20px;
+        color: #fff;
+        transition: transform 0.3s;
+      }
+      .music-control.playing .music-icon {
+        animation: musicRotate 4s linear infinite;
+      }
+      .music-control.paused .music-icon {
+        opacity: 0.6;
+      }
+      .music-control::after {
+        content: "";
+        position: absolute;
+        inset: -5px;
+        border: 1px solid var(--go);
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s, inset 0.3s;
+      }
+      .music-control.playing::after {
+        opacity: 0.4;
+        animation: musicPulse 2s ease-out infinite;
+      }
+      @keyframes musicRotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes musicPulse {
+        0% { transform: scale(1); opacity: 0.6; }
+        100% { transform: scale(1.4); opacity: 0; }
+      }
+
+      /* ══ CURTAIN OVERLAY ══ */
+      .curtain-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        pointer-events: all;
+        transition: opacity 0.4s ease;
+      }
+      .curtain-overlay.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      /* Kanjivaram silk curtain panels */
+      .curtain-panel {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
+        transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+        overflow: hidden;
+      }
+      .curtain-panel::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg,
+            #3a0612 0%,
+            #6b102a 8%,
+            #8c1838 18%,
+            #a01e42 35%,
+            #8c1838 50%,
+            #a01e42 65%,
+            #8c1838 82%,
+            #6b102a 92%,
+            #3a0612 100%);
+      }
+      /* Silk fabric weave texture */
+      .curtain-panel::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(90deg,
+            transparent 0px,
+            rgba(255,220,180,0.02) 1px,
+            transparent 2px,
+            rgba(0,0,0,0.06) 22px,
+            transparent 24px,
+            rgba(255,220,180,0.03) 46px,
+            transparent 48px
+          ),
+          repeating-linear-gradient(0deg,
+            transparent 0px,
+            rgba(201,144,58,0.015) 3px,
+            transparent 6px
+          );
+        pointer-events: none;
+      }
+
+      .curtain-left { left: 0; transform-origin: left center; }
+      .curtain-right { right: 0; transform-origin: right center; }
+      .curtain-overlay.open .curtain-left { transform: translateX(-100%); }
+      .curtain-overlay.open .curtain-right { transform: translateX(100%); }
+
+      /* Zari (gold thread) border — inner edge */
+      .curtain-border {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 54px;
+        pointer-events: none;
+      }
+      .curtain-border::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(180deg,
+            rgba(201,144,58,0.0) 0px,
+            rgba(232,194,122,0.35) 6px,
+            rgba(201,144,58,0.15) 12px,
+            rgba(232,194,122,0.35) 18px,
+            rgba(201,144,58,0.0) 24px
+          );
+      }
+      /* Mango / paisley motif repeating on border */
+      .curtain-border::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(180deg,
+            transparent 0px,
+            transparent 40px,
+            rgba(201,144,58,0.18) 42px,
+            transparent 44px,
+            transparent 80px
+          );
+      }
+      .curtain-left .curtain-border {
+        right: 0;
+        border-right: 3px solid rgba(201,144,58,0.5);
+        box-shadow: -4px 0 20px rgba(201,144,58,0.1) inset;
+      }
+      .curtain-right .curtain-border {
+        left: 0;
+        border-left: 3px solid rgba(201,144,58,0.5);
+        box-shadow: 4px 0 20px rgba(201,144,58,0.1) inset;
+      }
+
+      /* Zari motif overlay on panels */
+      .curtain-zari {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.08;
+        background:
+          radial-gradient(ellipse 30px 45px at 25% 15%, rgba(201,144,58,0.6) 0%, transparent 70%),
+          radial-gradient(ellipse 25px 40px at 75% 35%, rgba(201,144,58,0.5) 0%, transparent 70%),
+          radial-gradient(ellipse 30px 45px at 35% 55%, rgba(201,144,58,0.6) 0%, transparent 70%),
+          radial-gradient(ellipse 25px 40px at 65% 75%, rgba(201,144,58,0.5) 0%, transparent 70%),
+          radial-gradient(ellipse 30px 45px at 50% 92%, rgba(201,144,58,0.6) 0%, transparent 70%);
+      }
+
+      /* Silk shimmer */
+      .curtain-shimmer {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg,
+          transparent 20%,
+          rgba(255,220,180,0.06) 35%,
+          rgba(232,194,122,0.09) 50%,
+          rgba(255,220,180,0.06) 65%,
+          transparent 80%
+        );
+        background-size: 200% 100%;
+        animation: silkShimmer 5s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes silkShimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* Floating jasmine garland along top */
+      .curtain-jasmine-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50px;
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(58,6,18,0.9) 0%, transparent 100%);
+      }
+      .jasmine-strand {
+        font-size: 16px;
+        letter-spacing: 6px;
+        animation: jasmineSwing 4s ease-in-out infinite;
+        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+      }
+      @keyframes jasmineSwing {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(4px); }
+      }
+
+      /* Center content */
+      .curtain-center {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        text-align: center;
+        pointer-events: all;
+        padding: 0 20px;
+      }
+
+      /* Kolam/Rangoli SVG ornament */
+      .curtain-kolam {
+        width: 100px;
+        height: 100px;
+        opacity: 0.7;
+        animation: kolamSpin 30s linear infinite;
+        filter: drop-shadow(0 0 12px rgba(201,144,58,0.4));
+      }
+      @keyframes kolamSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      .curtain-tag {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 11px;
+        color: rgba(232,194,122,0.55);
+        letter-spacing: 6px;
+        text-transform: uppercase;
+      }
+
+      .curtain-title {
+        font-family: 'Cinzel Decorative', cursive;
+        font-size: 30px;
+        color: #e8c27a;
+        letter-spacing: 5px;
+        text-shadow: 0 2px 18px rgba(201,144,58,0.4), 0 0 40px rgba(201,144,58,0.15);
+        line-height: 1.3;
+      }
+
+      .curtain-names {
+        font-family: 'Playfair Display', serif;
+        font-size: 22px;
+        color: #f4c2cd;
+        letter-spacing: 3px;
+        text-shadow: 0 1px 10px rgba(0,0,0,0.4);
+      }
+      .curtain-names .curtain-amp {
+        color: #e8c27a;
+        font-style: italic;
+        margin: 0 6px;
+        font-size: 18px;
+      }
+
+      .curtain-date {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 14px;
+        color: rgba(232,194,122,0.7);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+      }
+
+      /* Diya row */
+      .curtain-diyas {
+        display: flex;
+        gap: 16px;
+        margin-top: 2px;
+      }
+      .curtain-diya {
+        font-size: 22px;
+        animation: diyaFlicker 2.5s ease-in-out infinite;
+        filter: drop-shadow(0 0 8px rgba(255,180,60,0.5));
+      }
+      .curtain-diya:nth-child(1) { animation-delay: 0s; }
+      .curtain-diya:nth-child(2) { animation-delay: 0.5s; }
+      .curtain-diya:nth-child(3) { animation-delay: 1s; }
+      .curtain-diya:nth-child(4) { animation-delay: 1.5s; }
+      .curtain-diya:nth-child(5) { animation-delay: 0.3s; }
+      @keyframes diyaFlicker {
+        0%, 100% { opacity: 0.55; transform: scale(1); }
+        30% { opacity: 1; transform: scale(1.12); }
+        60% { opacity: 0.75; transform: scale(1.05); }
+      }
+
+      /* Slider container */
+      .curtain-slider-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        margin-top: 8px;
+        transition: opacity 0.3s, transform 0.3s;
+      }
+      .curtain-slider-wrap.disappear {
+        opacity: 0;
+        transform: scale(0.9);
+        pointer-events: none;
+      }
+      .curtain-slider-label {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 12px;
+        color: rgba(232,194,122,0.55);
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        animation: curtainLabelPulse 2s ease-in-out infinite;
+      }
+      @keyframes curtainLabelPulse {
+        0%, 100% { opacity: 0.4; }
+        50% { opacity: 1; }
+      }
+
+      .curtain-slider-track {
+        position: relative;
+        width: 260px;
+        height: 52px;
+        background: linear-gradient(135deg, rgba(58,6,18,0.95), rgba(100,14,38,0.95));
+        border: 1.5px solid rgba(201,144,58,0.45);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        cursor: pointer;
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(232,194,122,0.15);
+      }
+      .curtain-slider-track::before {
+        content: '🌺  Slide to Unveil  🌺';
+        position: absolute;
+        width: 100%;
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: rgba(232,194,122,0.4);
+        pointer-events: none;
+      }
+
+      .curtain-slider-thumb {
+        position: absolute;
+        left: 4px;
+        width: 44px;
+        height: 44px;
+        background: linear-gradient(135deg, #c9903a, #e8c27a, #c9903a);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        box-shadow: 0 4px 18px rgba(201,144,58,0.6), inset 0 -2px 4px rgba(0,0,0,0.2);
+        transition: left 0.05s linear, box-shadow 0.3s;
+        cursor: grab;
+        z-index: 2;
+      }
+      .curtain-slider-thumb:active {
+        cursor: grabbing;
+        box-shadow: 0 6px 28px rgba(201,144,58,0.9);
+      }
+      .curtain-slider-thumb .thumb-icon {
+        font-size: 20px;
+        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+      }
+
+      .curtain-slider-glow {
+        position: absolute;
+        left: 4px;
+        top: 4px;
+        bottom: 4px;
+        width: 44px;
+        background: linear-gradient(90deg, rgba(232,194,122,0.25), rgba(201,144,58,0.08), transparent);
+        border-radius: 30px;
+        pointer-events: none;
+        transition: width 0.05s linear;
+      }
+
+      /* Mango motif floaters on curtain */
+      .curtain-motif {
+        position: absolute;
+        pointer-events: none;
+        opacity: 0.06;
+        z-index: 2;
+      }
+
+      /* Bottom jasmine garland drape */
+      .curtain-jasmine-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
+        z-index: 15;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        pointer-events: none;
+        background: linear-gradient(0deg, rgba(58,6,18,0.9) 0%, transparent 100%);
+      }
+
+      body.curtain-locked {
+        overflow: hidden;
+      }
+
+      @media (max-width: 750px) {
+        .curtain-title {
+          font-size: 22px;
+          letter-spacing: 3px;
+        }
+        .curtain-names {
+          font-size: 17px;
+        }
+        .curtain-date {
+          font-size: 12px;
+          letter-spacing: 3px;
+        }
+        .curtain-kolam {
+          width: 70px;
+          height: 70px;
+        }
+
+        .curtain-slider-track {
+          width: 230px;
+          height: 48px;
+        }
+        .curtain-slider-thumb {
+          width: 40px;
+          height: 40px;
+        }
+        .curtain-slider-glow {
+          width: 40px;
+        }
+        .curtain-slider-track::before {
+          font-size: 11px;
+        }
+        .curtain-jasmine-top {
+          height: 36px;
+        }
+        .jasmine-strand {
+          font-size: 13px;
+          letter-spacing: 4px;
+        }
+        .curtain-border {
+          width: 30px;
+        }
+      }
     </style>
   </head>
-  <body>
+  <body class="curtain-locked">
+    <!-- CURTAIN OVERLAY -->
+    <div class="curtain-overlay" id="curtain-overlay">
+      <!-- Jasmine garland top -->
+      <div class="curtain-jasmine-top">
+        <span class="jasmine-strand">❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀</span>
+      </div>
+
+      <!-- Left curtain panel -->
+      <div class="curtain-panel curtain-left">
+        <div class="curtain-zari"></div>
+        <div class="curtain-shimmer"></div>
+        <div class="curtain-border"></div>
+        <!-- Mango/paisley motifs -->
+        <svg class="curtain-motif" style="top:8%;left:10%;width:80px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.6"/><path d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z" fill="none" stroke="#e8c27a" stroke-width="1"/></svg>
+        <svg class="curtain-motif" style="bottom:15%;left:15%;width:60px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.5"/></svg>
+        <svg class="curtain-motif" style="top:45%;left:20%;width:50px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.4"/></svg>
+      </div>
+
+      <!-- Right curtain panel -->
+      <div class="curtain-panel curtain-right">
+        <div class="curtain-zari"></div>
+        <div class="curtain-shimmer"></div>
+        <div class="curtain-border"></div>
+        <svg class="curtain-motif" style="top:12%;right:10%;width:80px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.6"/><path d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z" fill="none" stroke="#e8c27a" stroke-width="1"/></svg>
+        <svg class="curtain-motif" style="bottom:20%;right:12%;width:60px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.5"/></svg>
+        <svg class="curtain-motif" style="top:50%;right:18%;width:50px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.4"/></svg>
+      </div>
+
+      <!-- Center content -->
+      <div class="curtain-center">
+        <!-- Kolam/Rangoli ornament -->
+        <svg class="curtain-kolam" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(100,100)">
+            <circle r="95" fill="none" stroke="#e8c27a" stroke-width="0.8" opacity="0.5"/>
+            <circle r="70" fill="none" stroke="#c9903a" stroke-width="0.6" opacity="0.4"/>
+            <circle r="45" fill="none" stroke="#e8c27a" stroke-width="0.8" opacity="0.5"/>
+            <circle r="20" fill="none" stroke="#c9903a" stroke-width="1" opacity="0.6"/>
+            <!-- 8-petal lotus -->
+            <g opacity="0.5">
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(45)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(90)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(135)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(180)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(225)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(270)"/>
+              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(315)"/>
+            </g>
+            <!-- Inner lotus -->
+            <g opacity="0.4" transform="rotate(22.5)">
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(45)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(90)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(135)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(180)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(225)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(270)"/>
+              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(315)"/>
+            </g>
+            <!-- Dots -->
+            <circle cx="0" cy="-82" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="58" cy="-58" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="82" cy="0" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="58" cy="58" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="0" cy="82" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="-58" cy="58" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="-82" cy="0" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="-58" cy="-58" r="3" fill="#e8c27a" opacity="0.5"/>
+          </g>
+        </svg>
+
+        <div class="curtain-tag">சுபம் · Auspicious Union</div>
+        <div class="curtain-title">Wedding Invitation</div>
+        <div class="curtain-names">
+          <span>Neha Sri</span>
+          <span class="curtain-amp">&amp;</span>
+          <span>Kavinnesan</span>
+        </div>
+        <div class="curtain-date">28th &amp; 29th May 2026 · Kunnathur</div>
+
+
+        <div class="curtain-diyas">
+          <span class="curtain-diya">🪔</span>
+          <span class="curtain-diya">🌺</span>
+          <span class="curtain-diya">🌸</span>
+          <span class="curtain-diya">🌺</span>
+          <span class="curtain-diya">🪔</span>
+        </div>
+
+        <div class="curtain-slider-wrap" id="curtain-slider-wrap">
+          <div class="curtain-slider-track" id="curtain-slider-track">
+            <div class="curtain-slider-glow" id="curtain-slider-glow"></div>
+            <div class="curtain-slider-thumb" id="curtain-slider-thumb">
+              <span class="thumb-icon">🪷</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Jasmine garland bottom -->
+      <div class="curtain-jasmine-bottom">
+        <span class="jasmine-strand">❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀</span>
+      </div>
+    </div>
+
     <canvas id="petal-canvas"></canvas>
 
     <!-- LIGHTBOX -->
@@ -2012,6 +2594,12 @@
       <div class="fbot">Made with love · Neha Sri &amp; Kavinnesan · 2026</div>
     </footer>
 
+    <!-- MUSIC CONTROL -->
+    <div class="music-control paused" id="music-btn" title="Toggle Music">
+      <span class="music-icon">🎶</span>
+    </div>
+
+
     <script>
       /* ─── LIGHTBOX DATA ─── */
       const photos = [
@@ -2113,6 +2701,195 @@
         secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130) cur=s.id;});
         navLinks.forEach(a=>{a.style.color=a.getAttribute("href")==="#"+cur?"var(--go)":"";});
       });
+
+      /* ─── MUSIC PLAYER ─── */
+      const audio = new Audio("_Vaseegara_Violin_Bgm_Ringtone_(by Fringster.com).mp3");
+      audio.loop = true;
+      const musicBtn = document.getElementById('music-btn');
+      let isManualPause = false;
+      let musicStarted = false;
+
+      function startMusic() {
+        if (!musicStarted) {
+          audio.play().then(() => {
+            musicBtn.classList.add('playing');
+            musicBtn.classList.remove('paused');
+            musicStarted = true;
+          }).catch(e => console.log("Autoplay blocked", e));
+        }
+      }
+
+      function toggleMusic() {
+        if (audio.paused) {
+          audio.play().catch(e => console.log("Interaction needed"));
+          musicBtn.classList.add('playing');
+          musicBtn.classList.remove('paused');
+          isManualPause = false;
+        } else {
+          audio.pause();
+          musicBtn.classList.remove('playing');
+          musicBtn.classList.add('paused');
+          isManualPause = true;
+        }
+      }
+
+      musicBtn.addEventListener('click', toggleMusic);
+
+      /* ─── CURTAIN SLIDER ─── */
+      (function() {
+        const overlay = document.getElementById('curtain-overlay');
+        const track = document.getElementById('curtain-slider-track');
+        const thumb = document.getElementById('curtain-slider-thumb');
+        const glow = document.getElementById('curtain-slider-glow');
+        let isDragging = false;
+        let startX = 0;
+        let thumbLeft = 4;
+        const thumbSize = thumb.offsetWidth || 44;
+        const maxLeft = () => track.offsetWidth - thumbSize - 4;
+        let curtainOpened = false;
+
+        function onStart(clientX) {
+          isDragging = true;
+          startX = clientX - thumbLeft;
+          thumb.style.transition = 'none';
+          glow.style.transition = 'none';
+          // Start music on first touch of slider
+          startMusic();
+        }
+
+        function onMove(clientX) {
+          if (!isDragging) return;
+          let newLeft = clientX - startX;
+          newLeft = Math.max(4, Math.min(newLeft, maxLeft()));
+          thumbLeft = newLeft;
+          thumb.style.left = newLeft + 'px';
+          glow.style.width = (newLeft + thumbSize) + 'px';
+
+          // If dragged past 80%, open curtain
+          if (newLeft >= maxLeft() * 0.8 && !curtainOpened) {
+            openCurtain();
+          }
+        }
+
+        function onEnd() {
+          if (!isDragging) return;
+          isDragging = false;
+          thumb.style.transition = 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+          glow.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+          // If not opened curtain, snap back
+          if (!curtainOpened) {
+            thumbLeft = 4;
+            thumb.style.left = '4px';
+            glow.style.width = '44px';
+          }
+        }
+
+        function openCurtain() {
+          curtainOpened = true;
+          // Immediately hide slider
+          const sliderWrap = document.getElementById('curtain-slider-wrap');
+          if (sliderWrap) sliderWrap.classList.add('disappear');
+          // Open curtains
+          overlay.classList.add('open');
+          // Quickly fade out and unlock scroll
+          setTimeout(() => {
+            overlay.classList.add('hidden');
+            document.body.classList.remove('curtain-locked');
+            startAutoScroll();
+          }, 900);
+          // Remove overlay from DOM fast
+          setTimeout(() => {
+            overlay.remove();
+          }, 1200);
+        }
+
+        // Mouse events
+        thumb.addEventListener('mousedown', (e) => {
+          e.preventDefault();
+          onStart(e.clientX);
+        });
+        document.addEventListener('mousemove', (e) => onMove(e.clientX));
+        document.addEventListener('mouseup', onEnd);
+
+        // Touch events
+        thumb.addEventListener('touchstart', (e) => {
+          e.preventDefault();
+          onStart(e.touches[0].clientX);
+        }, { passive: false });
+        document.addEventListener('touchmove', (e) => {
+          if (isDragging) {
+            e.preventDefault();
+            onMove(e.touches[0].clientX);
+          }
+        }, { passive: false });
+        document.addEventListener('touchend', onEnd);
+      })();
+
+      /* ─── AUTO SCROLL (Variable Speed) ─── */
+      let userScrolling = false;
+      let userScrollTimer = null;
+
+      function startAutoScroll() {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+        // Only start detecting manual scroll AFTER auto-scroll begins
+        function onUserScroll() {
+          userScrolling = true;
+          clearTimeout(userScrollTimer);
+          userScrollTimer = setTimeout(() => {
+            userScrolling = false;
+          }, 2000);
+        }
+        window.addEventListener('wheel', onUserScroll, { passive: true });
+        // Use scroll event instead of touchmove to avoid conflict with slider drag
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+          // Only count as user scroll if auto-scroll didn't cause it
+          if (userScrolling) return;
+        }, { passive: true });
+        window.addEventListener('touchstart', (e) => {
+          // If user touches the page (not curtain), treat subsequent scroll as manual
+          if (!document.getElementById('curtain-overlay')) {
+            onUserScroll();
+          }
+        }, { passive: true });
+        
+        function getSpeed() {
+          const hero = document.getElementById('hero');
+          const story = document.getElementById('story');
+          const events = document.getElementById('events');
+          
+          const y = window.scrollY + window.innerHeight / 2;
+          
+          // Hero section is extra slow
+          const inHero = (y >= hero.offsetTop && y < hero.offsetTop + hero.offsetHeight);
+          if (inHero) return 0.6;
+
+          // Story & Events are moderate
+          const inSlow = (
+            (y >= story.offsetTop && y < story.offsetTop + story.offsetHeight) ||
+            (y >= events.offsetTop && y < events.offsetTop + events.offsetHeight)
+          );
+          if (inSlow) return 1.2;
+          
+          return 2.0;
+        }
+
+        function scrollStep() {
+          let currentPos = window.scrollY;
+          if (currentPos < totalHeight && !isManualPause) {
+            if (!userScrolling) {
+              currentPos += getSpeed();
+              window.scrollTo(0, currentPos);
+            }
+            requestAnimationFrame(scrollStep);
+          }
+        }
+        
+        requestAnimationFrame(scrollStep);
+      }
+
     </script>
   </body>
 </html>
