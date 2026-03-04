@@ -233,14 +233,17 @@
       }
       .hero-peacock {
         width: 140px;
-        bottom: 0;
+        top: 20px;
         left: 20px;
-        transform: scaleX(-1);
+        /* Face outward */
+        transform: scaleX(1);
       }
       .hero-peacock-r {
         width: 140px;
-        bottom: 0;
+        top: 20px;
         right: 20px;
+        /* Face outward */
+        transform: scaleX(-1);
       }
       .hero-temple {
         width: 250px;
@@ -374,7 +377,7 @@
       }
       .cdb {
         text-align: center;
-        background: rgba(255, 255, 255, 0.7);
+        background: rgba(255, 255, 255, 0.4);
         border: 1px solid var(--gl);
         padding: 12px 15px;
         min-width: 64px;
@@ -395,6 +398,70 @@
       }
       .cdn.flip {
         animation: numFlip 0.3s ease;
+      }
+
+      .add-to-calendar-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 22px;
+        padding: 12px 28px;
+        border: 1.5px solid var(--gl);
+        background: linear-gradient(
+          135deg,
+          rgba(201, 144, 58, 0.12),
+          rgba(192, 57, 90, 0.08)
+        );
+        backdrop-filter: blur(8px);
+        color: var(--go);
+        font-family: "Cormorant Garamond", serif;
+        font-size: 14px;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        animation: fadeUp 1s 2.3s both;
+        z-index: 5;
+      }
+      .add-to-calendar-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(232, 194, 122, 0.15),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+      .add-to-calendar-btn:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(201, 144, 58, 0.22),
+          rgba(192, 57, 90, 0.15)
+        );
+        border-color: var(--go);
+        color: var(--dk);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(201, 144, 58, 0.25);
+      }
+      .add-to-calendar-btn:hover::before {
+        left: 100%;
+      }
+      .add-to-calendar-btn:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 10px rgba(201, 144, 58, 0.15);
+      }
+      .add-to-calendar-btn .cal-icon {
+        font-size: 16px;
+        filter: drop-shadow(0 1px 3px rgba(201, 144, 58, 0.3));
       }
 
       .scroll-hint {
@@ -523,7 +590,7 @@
         content: "";
         position: absolute;
         inset: 0;
-        background: url('Ghibli_Image.webp') no-repeat center top;
+        background: url("Ghibli_Image.webp") no-repeat center top;
         background-size: cover;
         opacity: 0.2;
         z-index: 1;
@@ -636,7 +703,12 @@
 
       /* ── GALLERY SECTION ── */
       #gallery {
-        background: linear-gradient(160deg, var(--pp) 0%, var(--pb) 60%, var(--cr) 100%);
+        background: linear-gradient(
+          160deg,
+          var(--pp) 0%,
+          var(--pb) 60%,
+          var(--cr) 100%
+        );
         position: relative;
         overflow: hidden;
         padding: 100px 20px;
@@ -685,9 +757,15 @@
       }
 
       /* Uniform vertical alignment */
-      .photo-frame:nth-child(1) { margin-top: 0; }
-      .photo-frame:nth-child(2) { margin-top: 0; }
-      .photo-frame:nth-child(3) { margin-top: 0; }
+      .photo-frame:nth-child(1) {
+        margin-top: 0;
+      }
+      .photo-frame:nth-child(2) {
+        margin-top: 0;
+      }
+      .photo-frame:nth-child(3) {
+        margin-top: 0;
+      }
 
       /* Outer ornamental border */
       .photo-frame::before {
@@ -696,7 +774,9 @@
         inset: -8px;
         border: 1px solid rgba(201, 144, 58, 0.35);
         pointer-events: none;
-        transition: inset 0.3s, border-color 0.3s;
+        transition:
+          inset 0.3s,
+          border-color 0.3s;
         z-index: 2;
       }
       .photo-frame:hover::before {
@@ -720,17 +800,40 @@
         height: 22px;
         z-index: 3;
       }
-      .photo-corner.tl { top: -11px; left: -11px; }
-      .photo-corner.tr { top: -11px; right: -11px; transform: scaleX(-1); }
-      .photo-corner.bl { bottom: -11px; left: -11px; transform: scaleY(-1); }
-      .photo-corner.br { bottom: -11px; right: -11px; transform: scale(-1); }
-      .photo-corner svg { width: 100%; height: 100%; }
+      .photo-corner.tl {
+        top: -11px;
+        left: -11px;
+      }
+      .photo-corner.tr {
+        top: -11px;
+        right: -11px;
+        transform: scaleX(-1);
+      }
+      .photo-corner.bl {
+        bottom: -11px;
+        left: -11px;
+        transform: scaleY(-1);
+      }
+      .photo-corner.br {
+        bottom: -11px;
+        right: -11px;
+        transform: scale(-1);
+      }
+      .photo-corner svg {
+        width: 100%;
+        height: 100%;
+      }
 
       /* The placeholder image itself */
       .photo-placeholder {
         width: 100%;
         aspect-ratio: 3/4;
-        background: linear-gradient(145deg, var(--pp) 0%, #fde8ef 40%, #f9d4dc 100%);
+        background: linear-gradient(
+          145deg,
+          var(--pp) 0%,
+          #fde8ef 40%,
+          #f9d4dc 100%
+        );
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -746,8 +849,16 @@
         position: absolute;
         inset: 0;
         background-image:
-          radial-gradient(circle at 20% 20%, rgba(201,144,58,0.06) 0%, transparent 50%),
-          radial-gradient(circle at 80% 80%, rgba(192,57,90,0.06) 0%, transparent 50%);
+          radial-gradient(
+            circle at 20% 20%,
+            rgba(201, 144, 58, 0.06) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(192, 57, 90, 0.06) 0%,
+            transparent 50%
+          );
       }
 
       /* Mandala watermark in placeholder */
@@ -824,7 +935,12 @@
       .photo-shine {
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+        background: linear-gradient(
+          135deg,
+          transparent 30%,
+          rgba(255, 255, 255, 0.18) 50%,
+          transparent 70%
+        );
         transform: translateX(-100%);
         transition: transform 0.7s ease;
         z-index: 4;
@@ -900,7 +1016,9 @@
         z-index: 5;
         transition: background 0.2s;
       }
-      .lb-close:hover { background: var(--pd); }
+      .lb-close:hover {
+        background: var(--pd);
+      }
       .lb-caption {
         margin-top: 16px;
         font-family: "Playfair Display", serif;
@@ -1537,9 +1655,24 @@
           width: 180px;
           top: 80px;
         }
-        .hero-peacock, .hero-peacock-r {
+        .hero-peacock,
+        .hero-peacock-r {
           width: 90px;
-          bottom: 0;
+          top: 10px;
+        }
+        .hero-sketch-left,
+        .hero-sketch-right {
+          width: 250px !important;
+          opacity: 0.3 !important;
+          bottom: -15% !important;
+        }
+        .hero-sketch-left {
+          transform: scaleX(-1) !important;
+          left: -20% !important;
+        }
+        .hero-sketch-right {
+          transform: none !important;
+          right: -20% !important;
         }
         .hero-content {
           padding: 0 10px;
@@ -1573,6 +1706,12 @@
         }
         .cdn {
           font-size: 18px;
+        }
+        .add-to-calendar-btn {
+          padding: 10px 22px;
+          font-size: 12px;
+          letter-spacing: 2px;
+          margin-top: 16px;
         }
         .cm {
           display: none;
@@ -1732,19 +1871,31 @@
         border: 1px solid var(--go);
         border-radius: 50%;
         opacity: 0;
-        transition: opacity 0.3s, inset 0.3s;
+        transition:
+          opacity 0.3s,
+          inset 0.3s;
       }
       .music-control.playing::after {
         opacity: 0.4;
         animation: musicPulse 2s ease-out infinite;
       }
       @keyframes musicRotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
       @keyframes musicPulse {
-        0% { transform: scale(1); opacity: 0.6; }
-        100% { transform: scale(1.4); opacity: 0; }
+        0% {
+          transform: scale(1);
+          opacity: 0.6;
+        }
+        100% {
+          transform: scale(1.4);
+          opacity: 0;
+        }
       }
 
       /* ══ CURTAIN OVERLAY ══ */
@@ -1773,48 +1924,62 @@
         overflow: hidden;
       }
       .curtain-panel::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background:
-          linear-gradient(180deg,
-            #2e0614 0%,
-            #6b1038 8%,
-            #8c1848 18%,
-            #a8205a 35%,
-            #8c1848 50%,
-            #a8205a 65%,
-            #8c1848 82%,
-            #6b1038 92%,
-            #2e0614 100%);
+        background: linear-gradient(
+          180deg,
+          #6b1038 0%,
+          #8c1848 8%,
+          #a8205a 18%,
+          #c0395a 35%,
+          #a8205a 50%,
+          #c0395a 65%,
+          #a8205a 82%,
+          #8c1848 92%,
+          #6b1038 100%
+        );
+        opacity: 1;
       }
       /* Silk fabric weave texture */
       .curtain-panel::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
         background:
-          repeating-linear-gradient(90deg,
+          repeating-linear-gradient(
+            90deg,
             transparent 0px,
-            rgba(255,220,180,0.02) 1px,
+            rgba(255, 220, 180, 0.02) 1px,
             transparent 2px,
-            rgba(0,0,0,0.06) 22px,
+            rgba(0, 0, 0, 0.06) 22px,
             transparent 24px,
-            rgba(255,220,180,0.03) 46px,
+            rgba(255, 220, 180, 0.03) 46px,
             transparent 48px
           ),
-          repeating-linear-gradient(0deg,
+          repeating-linear-gradient(
+            0deg,
             transparent 0px,
-            rgba(201,144,58,0.015) 3px,
+            rgba(201, 144, 58, 0.015) 3px,
             transparent 6px
           );
         pointer-events: none;
       }
 
-      .curtain-left { left: 0; transform-origin: left center; }
-      .curtain-right { right: 0; transform-origin: right center; }
-      .curtain-overlay.open .curtain-left { transform: translateX(-100%); }
-      .curtain-overlay.open .curtain-right { transform: translateX(100%); }
+      .curtain-left {
+        left: 0;
+        transform-origin: left center;
+      }
+      .curtain-right {
+        right: 0;
+        transform-origin: right center;
+      }
+      .curtain-overlay.open .curtain-left {
+        transform: translateX(-100%);
+      }
+      .curtain-overlay.open .curtain-right {
+        transform: translateX(100%);
+      }
 
       /* Zari (gold thread) border — inner edge */
       .curtain-border {
@@ -1825,41 +1990,41 @@
         pointer-events: none;
       }
       .curtain-border::before {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background:
-          repeating-linear-gradient(180deg,
-            rgba(201,144,58,0.0) 0px,
-            rgba(232,194,122,0.35) 6px,
-            rgba(201,144,58,0.15) 12px,
-            rgba(232,194,122,0.35) 18px,
-            rgba(201,144,58,0.0) 24px
-          );
+        background: repeating-linear-gradient(
+          180deg,
+          rgba(201, 144, 58, 0) 0px,
+          rgba(232, 194, 122, 0.35) 6px,
+          rgba(201, 144, 58, 0.15) 12px,
+          rgba(232, 194, 122, 0.35) 18px,
+          rgba(201, 144, 58, 0) 24px
+        );
       }
       /* Mango / paisley motif repeating on border */
       .curtain-border::after {
-        content: '';
+        content: "";
         position: absolute;
         inset: 0;
-        background:
-          repeating-linear-gradient(180deg,
-            transparent 0px,
-            transparent 40px,
-            rgba(201,144,58,0.18) 42px,
-            transparent 44px,
-            transparent 80px
-          );
+        background: repeating-linear-gradient(
+          180deg,
+          transparent 0px,
+          transparent 40px,
+          rgba(201, 144, 58, 0.18) 42px,
+          transparent 44px,
+          transparent 80px
+        );
       }
       .curtain-left .curtain-border {
         right: 0;
-        border-right: 3px solid rgba(232,194,122,0.5);
-        box-shadow: -4px 0 20px rgba(168,32,90,0.15) inset;
+        border-right: 3px solid rgba(232, 194, 122, 0.5);
+        box-shadow: -4px 0 20px rgba(168, 32, 90, 0.15) inset;
       }
       .curtain-right .curtain-border {
         left: 0;
-        border-left: 3px solid rgba(232,194,122,0.5);
-        box-shadow: 4px 0 20px rgba(168,32,90,0.15) inset;
+        border-left: 3px solid rgba(232, 194, 122, 0.5);
+        box-shadow: 4px 0 20px rgba(168, 32, 90, 0.15) inset;
       }
 
       /* Zari motif overlay on panels */
@@ -1869,22 +2034,43 @@
         pointer-events: none;
         opacity: 0.08;
         background:
-          radial-gradient(ellipse 30px 45px at 25% 15%, rgba(201,144,58,0.6) 0%, transparent 70%),
-          radial-gradient(ellipse 25px 40px at 75% 35%, rgba(201,144,58,0.5) 0%, transparent 70%),
-          radial-gradient(ellipse 30px 45px at 35% 55%, rgba(201,144,58,0.6) 0%, transparent 70%),
-          radial-gradient(ellipse 25px 40px at 65% 75%, rgba(201,144,58,0.5) 0%, transparent 70%),
-          radial-gradient(ellipse 30px 45px at 50% 92%, rgba(201,144,58,0.6) 0%, transparent 70%);
+          radial-gradient(
+            ellipse 30px 45px at 25% 15%,
+            rgba(201, 144, 58, 0.6) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 25px 40px at 75% 35%,
+            rgba(201, 144, 58, 0.5) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 30px 45px at 35% 55%,
+            rgba(201, 144, 58, 0.6) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 25px 40px at 65% 75%,
+            rgba(201, 144, 58, 0.5) 0%,
+            transparent 70%
+          ),
+          radial-gradient(
+            ellipse 30px 45px at 50% 92%,
+            rgba(201, 144, 58, 0.6) 0%,
+            transparent 70%
+          );
       }
 
       /* Silk shimmer — pink tint for bride, blue tint for groom */
       .curtain-shimmer {
         position: absolute;
         inset: 0;
-        background: linear-gradient(120deg,
+        background: linear-gradient(
+          120deg,
           transparent 20%,
-          rgba(255,180,200,0.07) 35%,
-          rgba(255,200,215,0.1) 50%,
-          rgba(255,180,200,0.07) 65%,
+          rgba(255, 180, 200, 0.07) 35%,
+          rgba(255, 200, 215, 0.1) 50%,
+          rgba(255, 180, 200, 0.07) 65%,
           transparent 80%
         );
         background-size: 200% 100%;
@@ -1892,8 +2078,12 @@
         pointer-events: none;
       }
       @keyframes silkShimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
       }
 
       /* Floating jasmine garland along top */
@@ -1908,17 +2098,28 @@
         justify-content: center;
         align-items: center;
         pointer-events: none;
-        background: linear-gradient(180deg, rgba(40,10,30,0.9) 0%, transparent 100%);
+        background: linear-gradient(
+          180deg,
+          rgba(107, 16, 56, 0.9) 0%,
+          transparent 100%
+        );
       }
       .jasmine-strand {
-        font-size: 16px;
+        font-size: 17px;
+        color: #ffedcc;
+        text-shadow: 0 0 8px rgba(255, 237, 204, 0.6);
         letter-spacing: 6px;
         animation: jasmineSwing 4s ease-in-out infinite;
-        filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4));
+        filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
       }
       @keyframes jasmineSwing {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(4px); }
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(4px);
+        }
       }
 
       /* Center content */
@@ -1940,49 +2141,59 @@
         height: 100px;
         opacity: 0.7;
         animation: kolamSpin 30s linear infinite;
-        filter: drop-shadow(0 0 12px rgba(201,144,58,0.4));
+        filter: drop-shadow(0 0 12px rgba(201, 144, 58, 0.4));
       }
       @keyframes kolamSpin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
       }
 
       .curtain-tag {
-        font-family: 'Cormorant Garamond', serif;
+        font-family: "Cormorant Garamond", serif;
         font-size: 11px;
-        color: rgba(232,194,122,0.55);
+        color: rgba(255, 240, 220, 0.85);
         letter-spacing: 6px;
+        font-weight: bold;
         text-transform: uppercase;
       }
 
       .curtain-title {
-        font-family: 'Cinzel Decorative', cursive;
+        font-family: "Cinzel Decorative", cursive;
         font-size: 30px;
-        color: #e8c27a;
+        color: #ffedcc;
         letter-spacing: 5px;
-        text-shadow: 0 2px 18px rgba(201,144,58,0.4), 0 0 40px rgba(201,144,58,0.15);
+        font-weight: bold;
+        text-shadow:
+          0 2px 18px rgba(255, 237, 204, 0.6),
+          0 0 40px rgba(255, 237, 204, 0.25);
         line-height: 1.3;
       }
 
       .curtain-names {
-        font-family: 'Playfair Display', serif;
-        font-size: 22px;
-        color: #f4c2cd;
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #ffffff;
         letter-spacing: 3px;
-        text-shadow: 0 1px 10px rgba(0,0,0,0.4);
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
       }
       .curtain-names .curtain-amp {
-        color: #e8c27a;
+        color: #ffedcc;
         font-style: italic;
         margin: 0 6px;
-        font-size: 18px;
+        font-size: 20px;
       }
 
       .curtain-date {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 14px;
-        color: rgba(232,194,122,0.7);
-        letter-spacing: 4px;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: rgba(255, 240, 220, 0.95);
+        letter-spacing: 5px;
         text-transform: uppercase;
       }
 
@@ -1995,17 +2206,37 @@
       .curtain-diya {
         font-size: 22px;
         animation: diyaFlicker 2.5s ease-in-out infinite;
-        filter: drop-shadow(0 0 8px rgba(255,180,60,0.5));
+        filter: drop-shadow(0 0 8px rgba(255, 180, 60, 0.5));
       }
-      .curtain-diya:nth-child(1) { animation-delay: 0s; }
-      .curtain-diya:nth-child(2) { animation-delay: 0.5s; }
-      .curtain-diya:nth-child(3) { animation-delay: 1s; }
-      .curtain-diya:nth-child(4) { animation-delay: 1.5s; }
-      .curtain-diya:nth-child(5) { animation-delay: 0.3s; }
+      .curtain-diya:nth-child(1) {
+        animation-delay: 0s;
+      }
+      .curtain-diya:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+      .curtain-diya:nth-child(3) {
+        animation-delay: 1s;
+      }
+      .curtain-diya:nth-child(4) {
+        animation-delay: 1.5s;
+      }
+      .curtain-diya:nth-child(5) {
+        animation-delay: 0.3s;
+      }
       @keyframes diyaFlicker {
-        0%, 100% { opacity: 0.55; transform: scale(1); }
-        30% { opacity: 1; transform: scale(1.12); }
-        60% { opacity: 0.75; transform: scale(1.05); }
+        0%,
+        100% {
+          opacity: 0.55;
+          transform: scale(1);
+        }
+        30% {
+          opacity: 1;
+          transform: scale(1.12);
+        }
+        60% {
+          opacity: 0.75;
+          transform: scale(1.05);
+        }
       }
 
       /* Slider container */
@@ -2015,7 +2246,9 @@
         align-items: center;
         gap: 8px;
         margin-top: 8px;
-        transition: opacity 0.3s, transform 0.3s;
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
       }
       .curtain-slider-wrap.disappear {
         opacity: 0;
@@ -2023,24 +2256,33 @@
         pointer-events: none;
       }
       .curtain-slider-label {
-        font-family: 'Cormorant Garamond', serif;
+        font-family: "Cormorant Garamond", serif;
         font-size: 12px;
-        color: rgba(232,194,122,0.55);
+        color: rgba(232, 194, 122, 0.55);
         letter-spacing: 4px;
         text-transform: uppercase;
         animation: curtainLabelPulse 2s ease-in-out infinite;
       }
       @keyframes curtainLabelPulse {
-        0%, 100% { opacity: 0.4; }
-        50% { opacity: 1; }
+        0%,
+        100% {
+          opacity: 0.4;
+        }
+        50% {
+          opacity: 1;
+        }
       }
 
       .curtain-slider-track {
         position: relative;
         width: 260px;
         height: 52px;
-        background: linear-gradient(135deg, rgba(140,24,80,0.9), rgba(92,16,53,0.9));
-        border: 1.5px solid rgba(201,144,58,0.45);
+        background: linear-gradient(
+          135deg,
+          rgba(140, 24, 80, 0.9),
+          rgba(92, 16, 53, 0.9)
+        );
+        border: 1.5px solid rgba(201, 144, 58, 0.45);
         border-radius: 30px;
         display: flex;
         align-items: center;
@@ -2049,16 +2291,18 @@
         touch-action: none;
         user-select: none;
         -webkit-user-select: none;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.4), inset 0 1px 0 rgba(232,194,122,0.15);
+        box-shadow:
+          0 4px 20px rgba(0, 0, 0, 0.4),
+          inset 0 1px 0 rgba(232, 194, 122, 0.15);
       }
       .curtain-slider-track::before {
-        content: '🌺  Slide to Unveil  🌺';
+        content: "🌺  Slide to Unveil  🌺";
         position: absolute;
         width: 100%;
         text-align: center;
         font-size: 12px;
         letter-spacing: 1px;
-        color: rgba(232,194,122,0.4);
+        color: rgba(232, 194, 122, 0.4);
         pointer-events: none;
       }
 
@@ -2073,18 +2317,22 @@
         align-items: center;
         justify-content: center;
         font-size: 18px;
-        box-shadow: 0 4px 18px rgba(201,144,58,0.6), inset 0 -2px 4px rgba(0,0,0,0.2);
-        transition: left 0.05s linear, box-shadow 0.3s;
+        box-shadow:
+          0 4px 18px rgba(201, 144, 58, 0.6),
+          inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+        transition:
+          left 0.05s linear,
+          box-shadow 0.3s;
         cursor: grab;
         z-index: 2;
       }
       .curtain-slider-thumb:active {
         cursor: grabbing;
-        box-shadow: 0 6px 28px rgba(201,144,58,0.9);
+        box-shadow: 0 6px 28px rgba(201, 144, 58, 0.9);
       }
       .curtain-slider-thumb .thumb-icon {
         font-size: 20px;
-        filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
       }
 
       .curtain-slider-glow {
@@ -2093,7 +2341,12 @@
         top: 4px;
         bottom: 4px;
         width: 44px;
-        background: linear-gradient(90deg, rgba(232,194,122,0.25), rgba(201,144,58,0.08), transparent);
+        background: linear-gradient(
+          90deg,
+          rgba(232, 194, 122, 0.25),
+          rgba(201, 144, 58, 0.08),
+          transparent
+        );
         border-radius: 30px;
         pointer-events: none;
         transition: width 0.05s linear;
@@ -2119,7 +2372,11 @@
         justify-content: center;
         align-items: center;
         pointer-events: none;
-        background: linear-gradient(0deg, rgba(40,10,30,0.9) 0%, transparent 100%);
+        background: linear-gradient(
+          0deg,
+          rgba(107, 16, 56, 0.9) 0%,
+          transparent 100%
+        );
       }
 
       body.curtain-locked {
@@ -2135,8 +2392,8 @@
           font-size: 17px;
         }
         .curtain-date {
-          font-size: 12px;
-          letter-spacing: 3px;
+          font-size: 14px;
+          letter-spacing: 4px;
         }
         .curtain-kolam {
           width: 70px;
@@ -2178,15 +2435,53 @@
         <span class="jasmine-strand">❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀ ❁ ❀</span>
       </div>
 
+
+
       <!-- Left curtain panel -->
       <div class="curtain-panel curtain-left">
         <div class="curtain-zari"></div>
         <div class="curtain-shimmer"></div>
         <div class="curtain-border"></div>
         <!-- Mango/paisley motifs -->
-        <svg class="curtain-motif" style="top:8%;left:10%;width:80px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.6"/><path d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z" fill="none" stroke="#e8c27a" stroke-width="1"/></svg>
-        <svg class="curtain-motif" style="bottom:15%;left:15%;width:60px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.5"/></svg>
-        <svg class="curtain-motif" style="top:45%;left:20%;width:50px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.4"/></svg>
+        <svg
+          class="curtain-motif"
+          style="top: 8%; left: 10%; width: 80px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.6"
+          />
+          <path
+            d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z"
+            fill="none"
+            stroke="#e8c27a"
+            stroke-width="1"
+          />
+        </svg>
+        <svg
+          class="curtain-motif"
+          style="bottom: 15%; left: 15%; width: 60px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.5"
+          />
+        </svg>
+        <svg
+          class="curtain-motif"
+          style="top: 45%; left: 20%; width: 50px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.4"
+          />
+        </svg>
       </div>
 
       <!-- Right curtain panel -->
@@ -2194,51 +2489,261 @@
         <div class="curtain-zari"></div>
         <div class="curtain-shimmer"></div>
         <div class="curtain-border"></div>
-        <svg class="curtain-motif" style="top:12%;right:10%;width:80px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.6"/><path d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z" fill="none" stroke="#e8c27a" stroke-width="1"/></svg>
-        <svg class="curtain-motif" style="bottom:20%;right:12%;width:60px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.5"/></svg>
-        <svg class="curtain-motif" style="top:50%;right:18%;width:50px" viewBox="0 0 80 120"><path d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z" fill="#c9903a" opacity="0.4"/></svg>
+        <svg
+          class="curtain-motif"
+          style="top: 12%; right: 10%; width: 80px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.6"
+          />
+          <path
+            d="M40 25 Q52 38 50 60 Q48 78 40 85 Q32 78 30 60 Q28 38 40 25Z"
+            fill="none"
+            stroke="#e8c27a"
+            stroke-width="1"
+          />
+        </svg>
+        <svg
+          class="curtain-motif"
+          style="bottom: 20%; right: 12%; width: 60px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.5"
+          />
+        </svg>
+        <svg
+          class="curtain-motif"
+          style="top: 50%; right: 18%; width: 50px"
+          viewBox="0 0 80 120"
+        >
+          <path
+            d="M40 10 Q65 30 60 70 Q55 100 40 110 Q25 100 20 70 Q15 30 40 10Z"
+            fill="#c9903a"
+            opacity="0.4"
+          />
+        </svg>
       </div>
 
       <!-- Center content -->
       <div class="curtain-center">
+        <!-- Huge Sketch overlay over curtains, behind text -->
+        <img
+          src="couple_sketch.png"
+          alt="Background Sketch"
+          style="
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-42%, -50%) scale(1.2);
+            width: 120vw;
+            max-width: 900px;
+            height: auto;
+            opacity: 0.2;
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: -1;
+            filter: sepia(0.8) hue-rotate(-20deg) contrast(1.2);
+          "
+        />
+
         <!-- Kolam/Rangoli ornament -->
-        <svg class="curtain-kolam" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          class="curtain-kolam"
+          viewBox="0 0 200 200"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <g transform="translate(100,100)">
-            <circle r="95" fill="none" stroke="#e8c27a" stroke-width="0.8" opacity="0.5"/>
-            <circle r="70" fill="none" stroke="#c9903a" stroke-width="0.6" opacity="0.4"/>
-            <circle r="45" fill="none" stroke="#e8c27a" stroke-width="0.8" opacity="0.5"/>
-            <circle r="20" fill="none" stroke="#c9903a" stroke-width="1" opacity="0.6"/>
+            <circle
+              r="95"
+              fill="none"
+              stroke="#e8c27a"
+              stroke-width="0.8"
+              opacity="0.5"
+            />
+            <circle
+              r="70"
+              fill="none"
+              stroke="#c9903a"
+              stroke-width="0.6"
+              opacity="0.4"
+            />
+            <circle
+              r="45"
+              fill="none"
+              stroke="#e8c27a"
+              stroke-width="0.8"
+              opacity="0.5"
+            />
+            <circle
+              r="20"
+              fill="none"
+              stroke="#c9903a"
+              stroke-width="1"
+              opacity="0.6"
+            />
             <!-- 8-petal lotus -->
             <g opacity="0.5">
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(45)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(90)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(135)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(180)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(225)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(270)"/>
-              <ellipse rx="10" ry="35" cy="-55" fill="none" stroke="#e8c27a" stroke-width="1" transform="rotate(315)"/>
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(45)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(90)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(135)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(180)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(225)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(270)"
+              />
+              <ellipse
+                rx="10"
+                ry="35"
+                cy="-55"
+                fill="none"
+                stroke="#e8c27a"
+                stroke-width="1"
+                transform="rotate(315)"
+              />
             </g>
             <!-- Inner lotus -->
             <g opacity="0.4" transform="rotate(22.5)">
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(45)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(90)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(135)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(180)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(225)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(270)"/>
-              <ellipse rx="6" ry="20" cy="-28" fill="none" stroke="#f2a3b3" stroke-width="0.8" transform="rotate(315)"/>
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(45)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(90)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(135)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(180)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(225)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(270)"
+              />
+              <ellipse
+                rx="6"
+                ry="20"
+                cy="-28"
+                fill="none"
+                stroke="#f2a3b3"
+                stroke-width="0.8"
+                transform="rotate(315)"
+              />
             </g>
             <!-- Dots -->
-            <circle cx="0" cy="-82" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="58" cy="-58" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="82" cy="0" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="58" cy="58" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="0" cy="82" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="-58" cy="58" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="-82" cy="0" r="3" fill="#e8c27a" opacity="0.5"/>
-            <circle cx="-58" cy="-58" r="3" fill="#e8c27a" opacity="0.5"/>
+            <circle cx="0" cy="-82" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="58" cy="-58" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="82" cy="0" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="58" cy="58" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="0" cy="82" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="-58" cy="58" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="-82" cy="0" r="3" fill="#e8c27a" opacity="0.5" />
+            <circle cx="-58" cy="-58" r="3" fill="#e8c27a" opacity="0.5" />
           </g>
         </svg>
 
@@ -2250,7 +2755,6 @@
           <span>Kavinnesan</span>
         </div>
         <div class="curtain-date">28th &amp; 29th May 2026 · Kunnathur</div>
-
 
         <div class="curtain-diyas">
           <span class="curtain-diya">🪔</span>
@@ -2283,8 +2787,17 @@
       <div class="lb-inner">
         <div class="lb-img" id="lb-img">
           <button class="lb-close" onclick="closeLightboxBtn()">✕</button>
-          <span style="font-size:48px;opacity:0.3" id="lb-icon">🌸</span>
-          <span style="font-family:'Cinzel Decorative',cursive;font-size:13px;color:rgba(255,255,255,0.4);letter-spacing:2px" id="lb-placeholder-text">Your photo here</span>
+          <span style="font-size: 48px; opacity: 0.3" id="lb-icon">🌸</span>
+          <span
+            style="
+              font-family: &quot;Cinzel Decorative&quot;, cursive;
+              font-size: 13px;
+              color: rgba(255, 255, 255, 0.4);
+              letter-spacing: 2px;
+            "
+            id="lb-placeholder-text"
+            >Your photo here</span
+          >
         </div>
         <div class="lb-caption" id="lb-caption">—</div>
         <div class="lb-sub" id="lb-sub">—</div>
@@ -2300,10 +2813,52 @@
     </nav>
 
     <section id="hero">
-      <div class="kr" style="width:680px;height:680px;top:55%;left:50%;border:1px dashed rgba(201,144,58,0.13);animation-duration:65s;"></div>
-      <div class="kr" style="width:520px;height:520px;top:55%;left:50%;border:1px solid rgba(192,57,90,0.09);animation-duration:48s;animation-direction:reverse;"></div>
-      <div class="kr" style="width:370px;height:370px;top:55%;left:50%;border:1px solid rgba(201,144,58,0.11);animation-duration:32s;"></div>
-      <div class="kr" style="width:220px;height:220px;top:55%;left:50%;border:1px dotted rgba(192,57,90,0.13);animation-duration:20s;animation-direction:reverse;"></div>
+      <div
+        class="kr"
+        style="
+          width: 680px;
+          height: 680px;
+          top: 55%;
+          left: 50%;
+          border: 1px dashed rgba(201, 144, 58, 0.13);
+          animation-duration: 65s;
+        "
+      ></div>
+      <div
+        class="kr"
+        style="
+          width: 520px;
+          height: 520px;
+          top: 55%;
+          left: 50%;
+          border: 1px solid rgba(192, 57, 90, 0.09);
+          animation-duration: 48s;
+          animation-direction: reverse;
+        "
+      ></div>
+      <div
+        class="kr"
+        style="
+          width: 370px;
+          height: 370px;
+          top: 55%;
+          left: 50%;
+          border: 1px solid rgba(201, 144, 58, 0.11);
+          animation-duration: 32s;
+        "
+      ></div>
+      <div
+        class="kr"
+        style="
+          width: 220px;
+          height: 220px;
+          top: 55%;
+          left: 50%;
+          border: 1px dotted rgba(192, 57, 90, 0.13);
+          animation-duration: 20s;
+          animation-direction: reverse;
+        "
+      ></div>
 
       <div class="diya">🪔</div>
       <div class="diya">🪔</div>
@@ -2312,14 +2867,117 @@
       <div class="diya">🌸</div>
       <div class="diya">🌺</div>
 
-      <div class="cm tl"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5"/><path d="M36 90 Q36 36 90 36" stroke="#c9903a" stroke-width="1"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
-      <div class="cm tr"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
-      <div class="cm bl"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
-      <div class="cm br"><svg viewBox="0 0 100 100" fill="none"><path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2"/><circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7"/><circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7"/><ellipse cx="50" cy="50" rx="18" ry="7" stroke="#c0395a" stroke-width="1.5" transform="rotate(-45 50 50)"/></svg></div>
+      <!-- Hero Bottom-Left Sketch Overlay -->
+      <img
+        src="couple_sketch.png"
+        alt="Couple Sketch Background Left"
+        class="hero-sketch-left"
+        style="
+          position: absolute;
+          bottom: -5%;
+          left: -5%;
+          width: 380px;
+          height: auto;
+          opacity: 0.7;
+          mix-blend-mode: multiply;
+          pointer-events: none;
+          z-index: 0;
+          filter: sepia(0.6) hue-rotate(-15deg);
+          transform: rotate(10deg) scaleX(-1);
+        "
+      />
 
-      <img src="temple.webp" alt="Temple" class="hm-img hero-temple">
-      <img src="peacock.webp" alt="Peacock" class="hm-img hero-peacock">
-      <img src="peacock.webp" alt="Peacock" class="hm-img hero-peacock-r">
+      <!-- Hero Bottom-Right Sketch Overlay -->
+      <img
+        src="couple_sketch.png"
+        alt="Couple Sketch Background Right"
+        class="hero-sketch-right"
+        style="
+          position: absolute;
+          bottom: -5%;
+          right: -5%;
+          width: 380px;
+          height: auto;
+          opacity: 0.7;
+          mix-blend-mode: multiply;
+          pointer-events: none;
+          z-index: 0;
+          filter: sepia(0.6) hue-rotate(-15deg);
+          transform: rotate(-10deg);
+        "
+      />
+
+      <div class="cm tl">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2" />
+          <path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5" />
+          <path d="M36 90 Q36 36 90 36" stroke="#c9903a" stroke-width="1" />
+          <circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7" />
+          <circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7" />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="18"
+            ry="7"
+            stroke="#c0395a"
+            stroke-width="1.5"
+            transform="rotate(-45 50 50)"
+          />
+        </svg>
+      </div>
+      <div class="cm tr">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2" />
+          <path d="M22 90 Q22 22 90 22" stroke="#c9903a" stroke-width="1.5" />
+          <circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7" />
+          <circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7" />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="18"
+            ry="7"
+            stroke="#c0395a"
+            stroke-width="1.5"
+            transform="rotate(-45 50 50)"
+          />
+        </svg>
+      </div>
+      <div class="cm bl">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2" />
+          <circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7" />
+          <circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7" />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="18"
+            ry="7"
+            stroke="#c0395a"
+            stroke-width="1.5"
+            transform="rotate(-45 50 50)"
+          />
+        </svg>
+      </div>
+      <div class="cm br">
+        <svg viewBox="0 0 100 100" fill="none">
+          <path d="M10 90 Q10 10 90 10" stroke="#c9903a" stroke-width="2" />
+          <circle cx="90" cy="10" r="5" fill="#c9903a" opacity=".7" />
+          <circle cx="10" cy="90" r="5" fill="#c9903a" opacity=".7" />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="18"
+            ry="7"
+            stroke="#c0395a"
+            stroke-width="1.5"
+            transform="rotate(-45 50 50)"
+          />
+        </svg>
+      </div>
+
+      <img src="temple.webp" alt="Temple" class="hm-img hero-temple" />
+      <img src="peacock.webp" alt="Peacock" class="hm-img hero-peacock" />
+      <img src="peacock.webp" alt="Peacock" class="hm-img hero-peacock-r" />
 
       <div class="hero-content">
         <div class="om">ॐ</div>
@@ -2337,20 +2995,46 @@
           <small>The day two hearts become one</small>
         </div>
         <div class="countdown">
-          <div class="cdb"><div class="cdn" id="cd-d">--</div><div class="cdl">Days</div></div>
-          <div class="cdb"><div class="cdn" id="cd-h">--</div><div class="cdl">Hours</div></div>
-          <div class="cdb"><div class="cdn" id="cd-m">--</div><div class="cdl">Mins</div></div>
-          <div class="cdb"><div class="cdn" id="cd-s">--</div><div class="cdl">Secs</div></div>
+          <div class="cdb">
+            <div class="cdn" id="cd-d">--</div>
+            <div class="cdl">Days</div>
+          </div>
+          <div class="cdb">
+            <div class="cdn" id="cd-h">--</div>
+            <div class="cdl">Hours</div>
+          </div>
+          <div class="cdb">
+            <div class="cdn" id="cd-m">--</div>
+            <div class="cdl">Mins</div>
+          </div>
+          <div class="cdb">
+            <div class="cdn" id="cd-s">--</div>
+            <div class="cdl">Secs</div>
+          </div>
         </div>
+        <button
+          class="add-to-calendar-btn"
+          id="add-to-calendar-btn"
+          onclick="addToCalendar()"
+          title="Save the date to your calendar"
+        >
+          <span class="cal-icon">📅</span> Add to Calendar
+        </button>
       </div>
 
-      <div class="scroll-hint">Scroll</div>
+      <div class="scroll-hint"></div>
     </section>
 
     <!-- TAMIL QUOTE BAND -->
     <div class="tamil-band">
-      <div class="tq-main">"யானும் நீயும் எவ்வழி அறிதும் — செம்புலப் பெயல்நீர் போல அன்புடை நெஞ்சம் தாம் கலந்தனவே"</div>
-      <div class="tq-trans">How have you and I known each other? Like rainwater merging into red earth, our loving hearts have become one.</div>
+      <div class="tq-main">
+        "யானும் நீயும் எவ்வழி அறிதும் — செம்புலப் பெயல்நீர் போல அன்புடை நெஞ்சம்
+        தாம் கலந்தனவே"
+      </div>
+      <div class="tq-trans">
+        How have you and I known each other? Like rainwater merging into red
+        earth, our loving hearts have become one.
+      </div>
       <div class="tq-source">Kurunthokai · Sangam Classical Poetry</div>
     </div>
 
@@ -2367,12 +3051,24 @@
             <div class="sb">
               <div class="sbl">The Bride</div>
               <div class="sbn">Neha Sri S R</div>
-              <div class="sbt">From the serene town of Sathyamangalam, nestled at the foothills of the Nilgiris, Neha Sri is a soul as genuine as the jasmine she adorns. A devoted classical dancer, her every movement tells a story — of devotion, of grace, of love given freely.</div>
+              <div class="sbt">
+                From the serene town of Sathyamangalam, nestled at the foothills
+                of the Nilgiris, Neha Sri is a soul as genuine as the jasmine
+                she adorns. A devoted classical dancer, her every movement tells
+                a story — of devotion, of grace, of love given freely.
+              </div>
             </div>
-            <div class="story-tquote">"நடனமாடும் போது அவள் தெய்வமாகிறாள்"<small>In her dance, she becomes divine</small></div>
-            <div class="sb" style="margin-top:24px">
+            <div class="story-tquote">
+              "நடனமாடும் போது அவள் தெய்வமாகிறாள்"<small
+                >In her dance, she becomes divine</small
+              >
+            </div>
+            <div class="sb" style="margin-top: 24px">
               <div class="sbl">Her Heart Says</div>
-              <div class="sbt">"He is steady, sincere, and home all at once. Love does not need grand gestures when it is this real."</div>
+              <div class="sbt">
+                "He is steady, sincere, and home all at once. Love does not need
+                grand gestures when it is this real."
+              </div>
             </div>
           </div>
           <div class="sdl"></div>
@@ -2380,16 +3076,33 @@
             <div class="sb">
               <div class="sbl">The Groom</div>
               <div class="sbn">Kavinnesan V P</div>
-              <div class="sbt">Born in Erode and now building dreams across the skyline of Sydney, Kavinnesan carries the pride of his construction family with quiet strength. He has built towers — but it is Neha Sri who has built a home in his heart.</div>
+              <div class="sbt">
+                Born in Erode and now building dreams across the skyline of
+                Sydney, Kavinnesan carries the pride of his construction family
+                with quiet strength. He has built towers — but it is Neha Sri
+                who has built a home in his heart.
+              </div>
             </div>
-            <div class="story-tquote">"கட்டிடம் கட்டலாம், ஆனால் காதலை கட்டுவது கடினம் — அவளால் அது எளிதானது"<small>Buildings can be built, but love is hard to build — she made it easy</small></div>
-            <div class="sb" style="margin-top:24px">
+            <div class="story-tquote">
+              "கட்டிடம் கட்டலாம், ஆனால் காதலை கட்டுவது கடினம் — அவளால் அது
+              எளிதானது"<small
+                >Buildings can be built, but love is hard to build — she made it
+                easy</small
+              >
+            </div>
+            <div class="sb" style="margin-top: 24px">
               <div class="sbl">His Heart Says</div>
-              <div class="sbt">"From Erode to Sydney, I have travelled far — but every road led me back to her. She is everything I never knew I was searching for."</div>
+              <div class="sbt">
+                "From Erode to Sydney, I have travelled far — but every road led
+                me back to her. She is everything I never knew I was searching
+                for."
+              </div>
             </div>
           </div>
         </div>
-        <div class="scon rv">❝ Two families, two cities, one eternal promise ❞</div>
+        <div class="scon rv">
+          ❝ Two families, two cities, one eternal promise ❞
+        </div>
       </div>
     </section>
 
@@ -2405,18 +3118,45 @@
         </div>
 
         <div class="gallery-grid">
-
           <!-- Photo 1 -->
           <div class="photo-frame rv d1" onclick="openLightbox(0)">
             <!-- Replace the photo-placeholder div below with: <img src="YOUR_IMAGE.jpg" alt="Neha Sri"> -->
             <div class="photo-placeholder" id="ph-0">
-              <img src="1.webp" alt="Mr &amp; Mrs.K" style="object-position: top;">
+              <img
+                src="1.webp"
+                alt="Mr &amp; Mrs.K"
+                style="object-position: top"
+              />
             </div>
             <!-- Corner ornaments -->
-            <div class="photo-corner tl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner tr"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner bl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner br"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
+            <div class="photo-corner tl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner tr">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner bl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner br">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
             <div class="photo-shine"></div>
             <div class="photo-caption">
               <div class="pc-name">Mr &amp; Mrs.K</div>
@@ -2427,12 +3167,36 @@
           <!-- Photo 2 (centre, offset lower) -->
           <div class="photo-frame rv d2" onclick="openLightbox(1)">
             <div class="photo-placeholder" id="ph-1">
-              <img src="2.webp" alt="Neha Sri &amp; Kavinnesan">
+              <img src="2.webp" alt="Neha Sri &amp; Kavinnesan" />
             </div>
-            <div class="photo-corner tl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner tr"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner bl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner br"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
+            <div class="photo-corner tl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner tr">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner bl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner br">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
             <div class="photo-shine"></div>
             <div class="photo-caption">
               <div class="pc-name">Neha Sri &amp; Kavinnesan</div>
@@ -2443,27 +3207,66 @@
           <!-- Photo 3 -->
           <div class="photo-frame rv d3" onclick="openLightbox(2)">
             <div class="photo-placeholder" id="ph-2">
-              <img src="3.webp" alt="Neha Sri &amp; Kavinnesan" style="object-position: center 20%;">
+              <img
+                src="3.webp"
+                alt="Neha Sri &amp; Kavinnesan"
+                style="object-position: center 20%"
+              />
             </div>
-            <div class="photo-corner tl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner tr"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner bl"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
-            <div class="photo-corner br"><svg viewBox="0 0 22 22" fill="none"><path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5"/><circle cx="20" cy="2" r="2" fill="#c9903a"/><circle cx="2" cy="20" r="2" fill="#c9903a"/></svg></div>
+            <div class="photo-corner tl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner tr">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner bl">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
+            <div class="photo-corner br">
+              <svg viewBox="0 0 22 22" fill="none">
+                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
+                <circle cx="20" cy="2" r="2" fill="#c9903a" />
+                <circle cx="2" cy="20" r="2" fill="#c9903a" />
+              </svg>
+            </div>
             <div class="photo-shine"></div>
             <div class="photo-caption">
               <div class="pc-name">Mrs &amp; Mr.Nehzzz</div>
               <div class="pc-note">Eternity</div>
             </div>
           </div>
-
-        </div><!-- /gallery-grid -->
+        </div>
+        <!-- /gallery-grid -->
 
         <!-- How to replace note (styled subtly) -->
-        <div class="rv" style="text-align:center;margin-top:44px;font-size:12px;color:var(--go);letter-spacing:2px;opacity:0.6;font-style:italic;">
+        <div
+          class="rv"
+          style="
+            text-align: center;
+            margin-top: 44px;
+            font-size: 12px;
+            color: var(--go);
+            letter-spacing: 2px;
+            opacity: 0.6;
+            font-style: italic;
+          "
+        >
           ✦ Click any frame to preview ✦
         </div>
-
-      </div><!-- /si -->
+      </div>
+      <!-- /si -->
     </section>
     <!-- ══ END GALLERY ══ -->
 
@@ -2483,20 +3286,30 @@
               <div class="et-name">நிச்சயதார்த்தம்</div>
               <div class="et-time">7:30 AM – 8:30 AM</div>
               <div class="et-venue">Nicchayathartham — Betrothal Ceremony</div>
-              <div class="et-desc">The sacred engagement ritual where both families formally pledge the union, exchanging blessings, betel leaves, and auspicious gifts before the divine.</div>
+              <div class="et-desc">
+                The sacred engagement ritual where both families formally pledge
+                the union, exchanging blessings, betel leaves, and auspicious
+                gifts before the divine.
+              </div>
             </div>
             <div class="et-dot-col"><div class="et-dot">💍</div></div>
             <div class="et-spacer"></div>
           </div>
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:0.3s">�️</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 0.3s">�️</div>
+            </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
               <div class="et-name">பட்டினிசாத விருந்து</div>
               <div class="et-time">8:30 AM – 10:00 AM</div>
               <div class="et-venue">Padinisadha Virundu — Welcome Feast</div>
-              <div class="et-desc">A warm and hearty welcome feast served to all guests — a traditional spread celebrating the coming together of two beloved families.</div>
+              <div class="et-desc">
+                A warm and hearty welcome feast served to all guests — a
+                traditional spread celebrating the coming together of two
+                beloved families.
+              </div>
             </div>
           </div>
           <div class="et-item rv d1">
@@ -2505,20 +3318,34 @@
               <div class="et-name">முகூர்த்தக்கால்</div>
               <div class="et-time">10:00 AM – 10:30 AM</div>
               <div class="et-venue">Muhurthakal — Auspicious Rituals</div>
-              <div class="et-desc">The sacred planting of the Muhurthakal — the auspicious post that marks the formal beginning of wedding ceremonies, accompanied by Vedic chants and prayers.</div>
+              <div class="et-desc">
+                The sacred planting of the Muhurthakal — the auspicious post
+                that marks the formal beginning of wedding ceremonies,
+                accompanied by Vedic chants and prayers.
+              </div>
             </div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:0.6s">🪔</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 0.6s">🪔</div>
+            </div>
             <div class="et-spacer"></div>
           </div>
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:0.9s">�</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 0.9s">�</div>
+            </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
               <div class="et-name">இணைச்சீர்</div>
               <div class="et-time">10:30 AM – 11:30 AM</div>
-              <div class="et-venue">Inaicheer — Exchange of Gifts &amp; Garlands</div>
-              <div class="et-desc">A joyful ceremony of mutual exchange — both families present garlands, sacred gifts, fruits, and traditional offerings, celebrating unity and respect.</div>
+              <div class="et-venue">
+                Inaicheer — Exchange of Gifts &amp; Garlands
+              </div>
+              <div class="et-desc">
+                A joyful ceremony of mutual exchange — both families present
+                garlands, sacred gifts, fruits, and traditional offerings,
+                celebrating unity and respect.
+              </div>
             </div>
           </div>
           <div class="et-item rv d1">
@@ -2526,21 +3353,35 @@
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
               <div class="et-name">மாப்பிள்ளை அழைப்பு</div>
               <div class="et-time">11:30 AM – 12:30 PM</div>
-              <div class="et-venue">Mappillai Azhaippu — Groom's Welcome Procession</div>
-              <div class="et-desc">The grand ceremonial procession welcoming the groom — accompanied by Nadaswaram music, garlands, and the warm embrace of the bride's family.</div>
+              <div class="et-venue">
+                Mappillai Azhaippu — Groom's Welcome Procession
+              </div>
+              <div class="et-desc">
+                The grand ceremonial procession welcoming the groom —
+                accompanied by Nadaswaram music, garlands, and the warm embrace
+                of the bride's family.
+              </div>
             </div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:1.2s">🐎</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 1.2s">🐎</div>
+            </div>
             <div class="et-spacer"></div>
           </div>
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:1.5s">🎶</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 1.5s">🎶</div>
+            </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
               <div class="et-name">வரவேற்பு</div>
               <div class="et-time">6:00 PM – 9:00 PM</div>
               <div class="et-venue">Varaverpu — Reception</div>
-              <div class="et-desc">A grand evening reception filled with music, dance, and celebration — an unforgettable night of joy shared with all family and dearest friends.</div>
+              <div class="et-desc">
+                A grand evening reception filled with music, dance, and
+                celebration — an unforgettable night of joy shared with all
+                family and dearest friends.
+              </div>
             </div>
           </div>
 
@@ -2551,20 +3392,34 @@
               <div class="et-name">சுபமுகூர்த்தம்</div>
               <div class="et-time">6:00 AM – 7:30 AM</div>
               <div class="et-venue">Subamuhurtham — Main Wedding Ceremony</div>
-              <div class="et-desc">The most sacred moment — the tying of the Thali under the auspicious Muhurtham, with Vedic chants, Oonjal, Nadaswaram, and the blessings of all.</div>
+              <div class="et-desc">
+                The most sacred moment — the tying of the Thali under the
+                auspicious Muhurtham, with Vedic chants, Oonjal, Nadaswaram, and
+                the blessings of all.
+              </div>
             </div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:1.8s">�</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 1.8s">�</div>
+            </div>
             <div class="et-spacer"></div>
           </div>
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
-            <div class="et-dot-col"><div class="et-dot" style="animation-delay:2.1s">🍛</div></div>
+            <div class="et-dot-col">
+              <div class="et-dot" style="animation-delay: 2.1s">🍛</div>
+            </div>
             <div class="et-content">
               <div class="et-day">நாள் 2 · Day 2 · 29th May 2026</div>
               <div class="et-name">சம்பந்தி விருந்து</div>
               <div class="et-time">12:00 PM – 2:00 PM</div>
-              <div class="et-venue">Sambandhi Virundu — Family Wedding Lunch</div>
-              <div class="et-desc">A grand traditional feast on banana leaves — rasam, sambar, payasam, and every delicious flavour of Tamil culture and hospitality, uniting both families.</div>
+              <div class="et-venue">
+                Sambandhi Virundu — Family Wedding Lunch
+              </div>
+              <div class="et-desc">
+                A grand traditional feast on banana leaves — rasam, sambar,
+                payasam, and every delicious flavour of Tamil culture and
+                hospitality, uniting both families.
+              </div>
             </div>
           </div>
         </div>
@@ -2573,8 +3428,13 @@
 
     <!-- TAMIL QUOTE 2 -->
     <div class="tq2 rv">
-      <div class="tq2-text">"கண்டுகேட்டு உண்டுயிர்த்து உற்றாலும் ஐம்புலனும் — ஒண்டொடி கண்ணே உள"</div>
-      <div class="tq2-trans">"All five senses — sight, sound, taste, breath and touch — find their joy in her alone"</div>
+      <div class="tq2-text">
+        "கண்டுகேட்டு உண்டுயிர்த்து உற்றாலும் ஐம்புலனும் — ஒண்டொடி கண்ணே உள"
+      </div>
+      <div class="tq2-trans">
+        "All five senses — sight, sound, taste, breath and touch — find their
+        joy in her alone"
+      </div>
       <div class="tq2-src">— Thirukkural · 1115</div>
     </div>
 
@@ -2590,26 +3450,219 @@
           <div class="rv-l">
             <div class="fb">❋ ✿ ❋</div>
             <div class="vname">Shri Sankar Mahal</div>
-            <div class="vaddr">Kunnathur,<br/>Tirupur District,<br/>Tamil Nadu, India</div>
-            <div class="vrow"><span class="icon">🕕</span><span>Gates open at <strong>6:00 AM</strong> on 29th May. Muhurtham at 7:00 AM.</span></div>
-            <div class="vrow"><span class="icon">🚗</span><span>Ample on-site parking. Easily accessible from Tirupur &amp; Erode.</span></div>
-            <div class="vrow"><span class="icon">👗</span><span>Dress code: Traditional South Indian attire — silks &amp; kanjivarams warmly welcomed!</span></div>
-            <div class="vrow"><span class="icon">📍</span><span>~25 km from Tirupur · ~35 km from Erode · ~30 km from Coimbatore Airport</span></div>
-            <a href="https://maps.google.com/?q=Kunnathur+Tirupur+Tamil+Nadu" target="_blank" class="vbtn"><span>Open in Google Maps ↗</span></a>
+            <div class="vaddr">
+              Perumanallur-Kunnathur Rd, Edayapalayam,<br />Tamil Nadu 638103, India
+            </div>
+            <div class="vrow">
+              <span class="icon">🕕</span
+              ><span
+                >Gates open at <strong>6:00 AM</strong> on 29th May. Muhurtham
+                at 7:00 AM.</span
+              >
+            </div>
+            <div class="vrow">
+              <span class="icon">🚗</span
+              ><span
+                >Ample on-site parking. Easily accessible from Tirupur &amp;
+                Erode.</span
+              >
+            </div>
+            <div class="vrow">
+              <span class="icon">👗</span
+              ><span
+                >Dress code: Traditional South Indian attire — silks &amp;
+                kanjivarams warmly welcomed!</span
+              >
+            </div>
+            <div class="vrow">
+              <span class="icon">📍</span
+              ><span
+                >~25 km from Tirupur · ~35 km from Erode · ~30 km from
+                Coimbatore Airport</span
+              >
+            </div>
+            <a
+              href="https://maps.google.com/?q=Shri+Sankar+Mahal,+Perumanallur-Kunnathur+Rd,+Edayapalayam,+Tamil+Nadu+638103,+India"
+              target="_blank"
+              class="vbtn"
+              ><span>Open in Google Maps ↗</span></a
+            >
           </div>
           <div class="mandala-box rv-r">
-            <svg class="mandala-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              class="mandala-svg"
+              viewBox="0 0 300 300"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <g transform="translate(150,150)">
-                <circle r="140" fill="none" stroke="#c9903a" stroke-width="1"/><circle r="110" fill="none" stroke="#c0395a" stroke-width=".8"/><circle r="80" fill="none" stroke="#c9903a" stroke-width="1.2"/><circle r="50" fill="none" stroke="#c0395a" stroke-width=".8"/>
-                <ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(45)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(90)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(135)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(180)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(225)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(270)"/><ellipse rx="12" ry="40" cy="-80" fill="none" stroke="#c9903a" stroke-width="1" transform="rotate(315)"/>
-                <g transform="rotate(22.5)"><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(45)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(90)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(135)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(180)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(225)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(270)"/><ellipse rx="8" ry="28" cy="-55" fill="none" stroke="#c0395a" stroke-width="1" transform="rotate(315)"/></g>
+                <circle r="140" fill="none" stroke="#c9903a" stroke-width="1" />
+                <circle
+                  r="110"
+                  fill="none"
+                  stroke="#c0395a"
+                  stroke-width=".8"
+                />
+                <circle
+                  r="80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1.2"
+                />
+                <circle r="50" fill="none" stroke="#c0395a" stroke-width=".8" />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(45)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(90)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(135)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(180)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(225)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(270)"
+                />
+                <ellipse
+                  rx="12"
+                  ry="40"
+                  cy="-80"
+                  fill="none"
+                  stroke="#c9903a"
+                  stroke-width="1"
+                  transform="rotate(315)"
+                />
+                <g transform="rotate(22.5)">
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(45)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(90)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(135)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(180)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(225)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(270)"
+                  />
+                  <ellipse
+                    rx="8"
+                    ry="28"
+                    cy="-55"
+                    fill="none"
+                    stroke="#c0395a"
+                    stroke-width="1"
+                    transform="rotate(315)"
+                  />
+                </g>
               </g>
             </svg>
             <div class="map-inner">
               <div class="map-pin">📍</div>
               <div class="map-label">Shri Sankar Mahal</div>
-              <div class="map-sub">Kunnathur, Tirupur</div>
-              <div class="map-det">✦ 25 km from Tirupur City<br/>✦ 35 km from Erode<br/>✦ 30 km from Coimbatore Airport</div>
+              <div class="map-sub">Perumanallur-Kunnathur Rd, Edayapalayam</div>
+              <div class="map-det">
+                ✦ 25 km from Tirupur City<br />✦ 35 km from Erode<br />✦ 30 km
+                from Coimbatore Airport
+              </div>
             </div>
           </div>
         </div>
@@ -2622,10 +3675,22 @@
       <div class="fnames">Neha Sri &amp; Kavinnesan</div>
       <div class="fsub">28th &amp; 29th May 2026 · Kunnathur, Tirupur</div>
       <div class="fdiv"></div>
-      <div class="fnote">We joyfully invite you to grace our wedding and seek your blessings as we step into this sacred new chapter together.<br/><br/><span style="color:var(--gl)">🌸 வணக்கம் · Vanakkam 🌸</span></div>
+      <div class="fnote">
+        We joyfully invite you to grace our wedding and seek your blessings as
+        we step into this sacred new chapter together.<br /><br /><span
+          style="color: var(--gl)"
+          >🌸 வணக்கம் · Vanakkam 🌸</span
+        >
+      </div>
       <div class="ftamil">
-        <div class="ftamil-q">"மணமகள் மலர்ந்தால் மணமகன் மகிழ்வான்; இருவரும் சேர்ந்தால் குடும்பம் மலரும்"</div>
-        <div class="ftamil-t">When the bride blossoms, the groom rejoices; when both come together, the family flourishes</div>
+        <div class="ftamil-q">
+          "மணமகள் மலர்ந்தால் மணமகன் மகிழ்வான்; இருவரும் சேர்ந்தால் குடும்பம்
+          மலரும்"
+        </div>
+        <div class="ftamil-t">
+          When the bride blossoms, the groom rejoices; when both come together,
+          the family flourishes
+        </div>
       </div>
       <div class="fbot">Made with love · Neha Sri &amp; Kavinnesan · 2026</div>
     </footer>
@@ -2635,306 +3700,394 @@
       <span class="music-icon">🎶</span>
     </div>
 
-
     <script>
-      /* ─── LIGHTBOX DATA ─── */
-      const photos = [
-        { caption: "Neha Sri & Kavinnesan", sub: "A Beautiful Moment", icon: "🌸" },
-        { caption: "Neha Sri & Kavinnesan", sub: "Together · Forever", icon: "💍" },
-        { caption: "Neha Sri & Kavinnesan", sub: "Eternity", icon: "🪔" },
-      ];
+            /* ─── LIGHTBOX DATA ─── */
+            const photos = [
+              { caption: "Neha Sri & Kavinnesan", sub: "A Beautiful Moment", icon: "🌸" },
+              { caption: "Neha Sri & Kavinnesan", sub: "Together · Forever", icon: "💍" },
+              { caption: "Neha Sri & Kavinnesan", sub: "Eternity", icon: "🪔" },
+            ];
 
-      function openLightbox(idx) {
-        const lb = document.getElementById("lightbox");
-        const p = photos[idx];
-        document.getElementById("lb-caption").textContent = p.caption;
-        document.getElementById("lb-sub").textContent = p.sub;
-        document.getElementById("lb-icon").textContent = p.icon;
-        // If the placeholder has a real <img> child, replicate it in lightbox
-        const srcPh = document.getElementById("ph-" + idx);
-        const srcImg = srcPh ? srcPh.querySelector("img") : null;
-        const lbImg = document.getElementById("lb-img");
-        const oldImg = lbImg.querySelector("img");
-        if (oldImg) oldImg.remove();
-        if (srcImg) {
-          const cloned = srcImg.cloneNode();
-          lbImg.prepend(cloned);
-          lbImg.querySelector("[id^='lb-placeholder']") && (lbImg.querySelector("span:last-of-type").style.display = "none");
-        }
-        lb.classList.add("open");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeLightbox(e) {
-        if (e.target === document.getElementById("lightbox")) {
-          document.getElementById("lightbox").classList.remove("open");
-          document.body.style.overflow = "";
-        }
-      }
-      function closeLightboxBtn() {
-        document.getElementById("lightbox").classList.remove("open");
-        document.body.style.overflow = "";
-      }
-      document.addEventListener("keydown", e => {
-        if (e.key === "Escape") {
-          document.getElementById("lightbox").classList.remove("open");
-          document.body.style.overflow = "";
-        }
-      });
-
-      /* ─── PETAL CANVAS ─── */
-      const canvas = document.getElementById("petal-canvas"),
-        ctx = canvas.getContext("2d");
-      function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-      resize();
-      window.addEventListener("resize", resize);
-      const COLS = ["#f8aec0","#f4c2cd","#fce4ec","#e8967f","#ffb3c1","#ffd6e0","#e8c27a","#f9d4dc","#c8e6c9","#a5d6a7"];
-      function mkP(init) {
-        return { x: Math.random()*window.innerWidth, y: init ? Math.random()*window.innerHeight : -20, sz: Math.random()*11+5, vy: Math.random()*1.3+0.5, vx: (Math.random()-0.5)*0.7, rot: Math.random()*Math.PI*2, rs: (Math.random()-0.5)*0.05, col: COLS[Math.floor(Math.random()*COLS.length)], alpha: Math.random()*0.45+0.28, sway: Math.random()*2, swOff: Math.random()*Math.PI*2 };
-      }
-      const PTS = Array.from({length:36},()=>mkP(true));
-      let fr = 0;
-      (function loop() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        fr++;
-        PTS.forEach(p=>{
-          p.y+=p.vy; p.x+=p.vx+Math.sin(fr*0.018+p.swOff)*p.sway*0.24; p.rot+=p.rs;
-          ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.alpha; ctx.fillStyle=p.col;
-          ctx.beginPath(); ctx.ellipse(0,0,p.sz*0.42,p.sz,0,0,Math.PI*2); ctx.fill();
-          ctx.globalAlpha=p.alpha*0.32; ctx.fillStyle="#fff";
-          ctx.beginPath(); ctx.ellipse(-p.sz*0.08,-p.sz*0.28,p.sz*0.13,p.sz*0.3,-0.4,0,Math.PI*2); ctx.fill();
-          ctx.restore();
-          if(p.y>canvas.height+30) Object.assign(p,mkP(false));
-        });
-        requestAnimationFrame(loop);
-      })();
-
-      /* ─── COUNTDOWN ─── */
-      const TARGET = new Date("2026-05-28T01:30:00Z");
-      const els = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
-      const pad = n => String(Math.max(0,n)).padStart(2,"0");
-      let prev = {d:"",h:"",m:"",s:""};
-      function tick() {
-        const diff = TARGET - Date.now();
-        if(diff<=0){["d","h","m","s"].forEach(k=>els[k].textContent="00");return;}
-        const v = { d:pad(Math.floor(diff/86400000)), h:pad(Math.floor((diff%86400000)/3600000)), m:pad(Math.floor((diff%3600000)/60000)), s:pad(Math.floor((diff%60000)/1000)) };
-        ["d","h","m","s"].forEach(k=>{
-          if(v[k]!==prev[k]){els[k].textContent=v[k];els[k].classList.remove("flip");void els[k].offsetWidth;els[k].classList.add("flip");prev[k]=v[k];}
-        });
-      }
-      setInterval(tick,1000); tick();
-
-      /* ─── SCROLL REVEAL ─── */
-      const obs = new IntersectionObserver(entries=>{
-        entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");obs.unobserve(e.target);}});
-      },{threshold:0.1});
-      document.querySelectorAll(".rv,.rv-l,.rv-r").forEach(el=>obs.observe(el));
-
-      /* ─── NAV ACTIVE ─── */
-      const secs = document.querySelectorAll("section[id]"), navLinks = document.querySelectorAll("nav a");
-      window.addEventListener("scroll",()=>{
-        let cur="";
-        secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130) cur=s.id;});
-        navLinks.forEach(a=>{a.style.color=a.getAttribute("href")==="#"+cur?"var(--go)":"";});
-      });
-
-      /* ─── MUSIC PLAYER ─── */
-      const audio = new Audio("song.mp3");
-      audio.loop = true;
-      const musicBtn = document.getElementById('music-btn');
-      let isManualPause = false;
-      let musicStarted = false;
-
-      function startMusic() {
-        if (!musicStarted) {
-          audio.play().then(() => {
-            musicBtn.classList.add('playing');
-            musicBtn.classList.remove('paused');
-            musicStarted = true;
-          }).catch(e => console.log("Autoplay blocked", e));
-        }
-      }
-
-      // Fallback: any click/tap on the curtain overlay also unlocks audio
-      const curtainOverlayEl = document.getElementById('curtain-overlay');
-      if (curtainOverlayEl) {
-        curtainOverlayEl.addEventListener('click', startMusic);
-        curtainOverlayEl.addEventListener('touchend', startMusic);
-      }
-
-      function toggleMusic() {
-        if (audio.paused) {
-          audio.play().catch(e => console.log("Interaction needed"));
-          musicBtn.classList.add('playing');
-          musicBtn.classList.remove('paused');
-          isManualPause = false;
-        } else {
-          audio.pause();
-          musicBtn.classList.remove('playing');
-          musicBtn.classList.add('paused');
-          isManualPause = true;
-        }
-      }
-
-      musicBtn.addEventListener('click', toggleMusic);
-
-      /* ─── CURTAIN SLIDER ─── */
-      (function() {
-        const overlay = document.getElementById('curtain-overlay');
-        const track = document.getElementById('curtain-slider-track');
-        const thumb = document.getElementById('curtain-slider-thumb');
-        const glow = document.getElementById('curtain-slider-glow');
-        let isDragging = false;
-        let startX = 0;
-        let thumbLeft = 4;
-        const thumbSize = thumb.offsetWidth || 44;
-        const maxLeft = () => track.offsetWidth - thumbSize - 4;
-        let curtainOpened = false;
-
-        function onStart(clientX) {
-          isDragging = true;
-          startX = clientX - thumbLeft;
-          thumb.style.transition = 'none';
-          glow.style.transition = 'none';
-          // Start music on first touch of slider
-          startMusic();
-        }
-
-        function onMove(clientX) {
-          if (!isDragging) return;
-          let newLeft = clientX - startX;
-          newLeft = Math.max(4, Math.min(newLeft, maxLeft()));
-          thumbLeft = newLeft;
-          thumb.style.left = newLeft + 'px';
-          glow.style.width = (newLeft + thumbSize) + 'px';
-
-          // If dragged past 80%, open curtain
-          if (newLeft >= maxLeft() * 0.8 && !curtainOpened) {
-            openCurtain();
-          }
-        }
-
-        function onEnd() {
-          if (!isDragging) return;
-          isDragging = false;
-          thumb.style.transition = 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-          glow.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-
-          // If not opened curtain, snap back
-          if (!curtainOpened) {
-            thumbLeft = 4;
-            thumb.style.left = '4px';
-            glow.style.width = '44px';
-          }
-        }
-
-        function openCurtain() {
-          curtainOpened = true;
-          // Immediately hide slider
-          const sliderWrap = document.getElementById('curtain-slider-wrap');
-          if (sliderWrap) sliderWrap.classList.add('disappear');
-          // Open curtains
-          overlay.classList.add('open');
-          // Quickly fade out and unlock scroll
-          setTimeout(() => {
-            overlay.classList.add('hidden');
-            document.body.classList.remove('curtain-locked');
-            startAutoScroll();
-          }, 900);
-          // Remove overlay from DOM fast
-          setTimeout(() => {
-            overlay.remove();
-          }, 1200);
-        }
-
-        // Mouse events
-        thumb.addEventListener('mousedown', (e) => {
-          e.preventDefault();
-          startMusic(); // Direct call in user gesture
-          onStart(e.clientX);
-        });
-        document.addEventListener('mousemove', (e) => onMove(e.clientX));
-        document.addEventListener('mouseup', onEnd);
-
-        // Touch events
-        thumb.addEventListener('touchstart', (e) => {
-          e.preventDefault();
-          startMusic(); // Direct call in user gesture
-          onStart(e.touches[0].clientX);
-        }, { passive: false });
-        document.addEventListener('touchmove', (e) => {
-          if (isDragging) {
-            e.preventDefault();
-            onMove(e.touches[0].clientX);
-          }
-        }, { passive: false });
-        document.addEventListener('touchend', onEnd);
-      })();
-
-      /* ─── AUTO SCROLL (Variable Speed) ─── */
-      let userScrolling = false;
-      let userScrollTimer = null;
-
-      function startAutoScroll() {
-        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-        // Only start detecting manual scroll AFTER auto-scroll begins
-        function onUserScroll() {
-          userScrolling = true;
-          clearTimeout(userScrollTimer);
-          userScrollTimer = setTimeout(() => {
-            userScrolling = false;
-          }, 2000);
-        }
-        window.addEventListener('wheel', onUserScroll, { passive: true });
-        // Use scroll event instead of touchmove to avoid conflict with slider drag
-        let lastScrollY = window.scrollY;
-        window.addEventListener('scroll', () => {
-          // Only count as user scroll if auto-scroll didn't cause it
-          if (userScrolling) return;
-        }, { passive: true });
-        window.addEventListener('touchstart', (e) => {
-          // If user touches the page (not curtain), treat subsequent scroll as manual
-          if (!document.getElementById('curtain-overlay')) {
-            onUserScroll();
-          }
-        }, { passive: true });
-        
-        function getSpeed() {
-          const hero = document.getElementById('hero');
-          const story = document.getElementById('story');
-          const events = document.getElementById('events');
-          
-          const y = window.scrollY + window.innerHeight / 2;
-          
-          // Hero section is extra slow
-          const inHero = (y >= hero.offsetTop && y < hero.offsetTop + hero.offsetHeight);
-          if (inHero) return 0.6;
-
-          // Story & Events are moderate
-          const inSlow = (
-            (y >= story.offsetTop && y < story.offsetTop + story.offsetHeight) ||
-            (y >= events.offsetTop && y < events.offsetTop + events.offsetHeight)
-          );
-          if (inSlow) return 1.2;
-          
-          return 2.0;
-        }
-
-        function scrollStep() {
-          let currentPos = window.scrollY;
-          if (currentPos < totalHeight && !isManualPause) {
-            if (!userScrolling) {
-              currentPos += getSpeed();
-              window.scrollTo(0, currentPos);
+            function openLightbox(idx) {
+              const lb = document.getElementById("lightbox");
+              const p = photos[idx];
+              document.getElementById("lb-caption").textContent = p.caption;
+              document.getElementById("lb-sub").textContent = p.sub;
+              document.getElementById("lb-icon").textContent = p.icon;
+              // If the placeholder has a real <img> child, replicate it in lightbox
+              const srcPh = document.getElementById("ph-" + idx);
+              const srcImg = srcPh ? srcPh.querySelector("img") : null;
+              const lbImg = document.getElementById("lb-img");
+              const oldImg = lbImg.querySelector("img");
+              if (oldImg) oldImg.remove();
+              if (srcImg) {
+                const cloned = srcImg.cloneNode();
+                lbImg.prepend(cloned);
+                lbImg.querySelector("[id^='lb-placeholder']") && (lbImg.querySelector("span:last-of-type").style.display = "none");
+              }
+              lb.classList.add("open");
+              document.body.style.overflow = "hidden";
             }
-            requestAnimationFrame(scrollStep);
-          }
-        }
-        
-        requestAnimationFrame(scrollStep);
-      }
 
+            function closeLightbox(e) {
+              if (e.target === document.getElementById("lightbox")) {
+                document.getElementById("lightbox").classList.remove("open");
+                document.body.style.overflow = "";
+              }
+            }
+            function closeLightboxBtn() {
+              document.getElementById("lightbox").classList.remove("open");
+              document.body.style.overflow = "";
+            }
+            document.addEventListener("keydown", e => {
+              if (e.key === "Escape") {
+                document.getElementById("lightbox").classList.remove("open");
+                document.body.style.overflow = "";
+              }
+            });
+
+            /* ─── PETAL CANVAS ─── */
+            const canvas = document.getElementById("petal-canvas"),
+              ctx = canvas.getContext("2d");
+            function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+            resize();
+            window.addEventListener("resize", resize);
+            const COLS = ["#f8aec0","#f4c2cd","#fce4ec","#e8967f","#ffb3c1","#ffd6e0","#e8c27a","#f9d4dc","#c8e6c9","#a5d6a7"];
+            function mkP(init) {
+              return { x: Math.random()*window.innerWidth, y: init ? Math.random()*window.innerHeight : -20, sz: Math.random()*11+5, vy: Math.random()*1.3+0.5, vx: (Math.random()-0.5)*0.7, rot: Math.random()*Math.PI*2, rs: (Math.random()-0.5)*0.05, col: COLS[Math.floor(Math.random()*COLS.length)], alpha: Math.random()*0.45+0.28, sway: Math.random()*2, swOff: Math.random()*Math.PI*2 };
+            }
+            const PTS = Array.from({length:36},()=>mkP(true));
+            let fr = 0;
+            (function loop() {
+              ctx.clearRect(0,0,canvas.width,canvas.height);
+              fr++;
+              PTS.forEach(p=>{
+                p.y+=p.vy; p.x+=p.vx+Math.sin(fr*0.018+p.swOff)*p.sway*0.24; p.rot+=p.rs;
+                ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.globalAlpha=p.alpha; ctx.fillStyle=p.col;
+                ctx.beginPath(); ctx.ellipse(0,0,p.sz*0.42,p.sz,0,0,Math.PI*2); ctx.fill();
+                ctx.globalAlpha=p.alpha*0.32; ctx.fillStyle="#fff";
+                ctx.beginPath(); ctx.ellipse(-p.sz*0.08,-p.sz*0.28,p.sz*0.13,p.sz*0.3,-0.4,0,Math.PI*2); ctx.fill();
+                ctx.restore();
+                if(p.y>canvas.height+30) Object.assign(p,mkP(false));
+              });
+              requestAnimationFrame(loop);
+            })();
+
+            /* ─── COUNTDOWN ─── */
+            const TARGET = new Date("2026-05-28T01:30:00Z");
+            const els = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"), m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+            const pad = n => String(Math.max(0,n)).padStart(2,"0");
+            let prev = {d:"",h:"",m:"",s:""};
+            function tick() {
+              const diff = TARGET - Date.now();
+              if(diff<=0){["d","h","m","s"].forEach(k=>els[k].textContent="00");return;}
+              const v = { d:pad(Math.floor(diff/86400000)), h:pad(Math.floor((diff%86400000)/3600000)), m:pad(Math.floor((diff%3600000)/60000)), s:pad(Math.floor((diff%60000)/1000)) };
+              ["d","h","m","s"].forEach(k=>{
+                if(v[k]!==prev[k]){els[k].textContent=v[k];els[k].classList.remove("flip");void els[k].offsetWidth;els[k].classList.add("flip");prev[k]=v[k];}
+              });
+            }
+            setInterval(tick,1000); tick();
+
+            /* ─── ADD TO GOOGLE CALENDAR ─── */
+            function addToCalendar() {
+              const title = 'Wedding of Neha Sri & Kavinnesan';
+              const location = 'Shri Sankar Mahal, Perumanallur-Kunnathur Rd, Edayapalayam, Tamil Nadu 638103, India';
+              const description = 'You are warmly invited to the wedding celebration of Neha Sri S R & Kavinnesan V P.\n\nDay 1 (28th May):\n\u2022 Nicchayathartham (7:30\u20138:30 AM)\n\u2022 Welcome Feast (8:30\u201310:00 AM)\n\u2022 Muhurthakal (10:00\u201310:30 AM)\n\u2022 Inaicheer (10:30\u201311:30 AM)\n\u2022 Mappillai Azhaippu (11:30 AM\u201312:30 PM)\n\u2022 Reception (6:00\u20139:00 PM)\n\nDay 2 (29th May):\n\u2022 Subamuhurtham \u2013 Main Wedding (6:00\u20137:30 AM)\n\u2022 Sambandhi Virundu \u2013 Family Lunch (12:00\u20132:00 PM)\n\nVenue: Shri Sankar Mahal, Perumanallur-Kunnathur Rd, Edayapalayam';
+              var gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                + '&text=' + encodeURIComponent(title)
+                + '&dates=20260528T020000Z/20260529T083000Z'
+                + '&details=' + encodeURIComponent(description)
+                + '&location=' + encodeURIComponent(location);
+              window.open(gcalUrl, '_blank');
+            }
+
+            const DT_START = '20260528T020000Z';
+            const DT_END = '20260529T083000Z';
+
+            function toggleCalDropdown(e) {
+              e.stopPropagation();
+              document.getElementById('cal-dropdown').classList.toggle('open');
+            }
+            document.addEventListener('click', function(e) {
+              const wrap = document.getElementById('cal-wrap');
+              if (wrap && !wrap.contains(e.target)) {
+                document.getElementById('cal-dropdown').classList.remove('open');
+              }
+            });
+
+            function addToGoogleCalendar() {
+              const gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
+                + '&text=' + encodeURIComponent(CAL_TITLE)
+                + '&dates=' + DT_START + '/' + DT_END
+                + '&details=' + encodeURIComponent(CAL_DESC)
+                + '&location=' + encodeURIComponent(CAL_LOC)
+                + '&sf=true&output=xml';
+              window.open(gcalUrl, '_blank');
+              document.getElementById('cal-dropdown').classList.remove('open');
+            }
+
+            function downloadICS() {
+              const title = 'Wedding of Neha Sri & Kavinnesan';
+              const location = 'Shri Sankar Mahal, Perumanallur-Kunnathur Rd, Edayapalayam, Tamil Nadu 638103, India';
+              const description = 'You are warmly invited to the wedding celebration of Neha Sri S R & Kavinnesan V P.\n\nDay 1 (28th May): Nicchayathartham, Welcome Feast, Muhurthakal, Inaicheer, Mappillai Azhaippu & Reception\nDay 2 (29th May): Subamuhurtham (Main Wedding Ceremony) & Sambandhi Virundu\n\nVenue: Shri Sankar Mahal, Perumanallur-Kunnathur Rd, Edayapalayam';
+              // Event spans from May 28, 2026 morning to May 29, 2026 evening (IST = UTC+5:30)
+              const dtStart = '20260528T020000Z'; // May 28 7:30 AM IST = 2:00 AM UTC
+              const dtEnd = '20260529T083000Z';   // May 29 2:00 PM IST = 8:30 AM UTC
+              const now = new Date();
+              const stamp = now.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
+
+              const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//NehaSriKavinnesanWedding//EN',
+                'CALSCALE:GREGORIAN',
+                'METHOD:PUBLISH',
+                'BEGIN:VEVENT',
+                'DTSTART:' + dtStart,
+                'DTEND:' + dtEnd,
+                'DTSTAMP:' + stamp,
+                'UID:nehakavi-wedding-2026@invitation',
+                'SUMMARY:' + title,
+                'DESCRIPTION:' + description.replace(/\n/g, '\\n'),
+                'LOCATION:' + location,
+                'STATUS:CONFIRMED',
+                'TRANSP:OPAQUE',
+                'BEGIN:VALARM',
+                'TRIGGER:-P1D',
+                'ACTION:DISPLAY',
+                'DESCRIPTION:Reminder: ' + title + ' is tomorrow!',
+                'END:VALARM',
+                'BEGIN:VALARM',
+                'TRIGGER:-PT2H',
+                'ACTION:DISPLAY',
+                'DESCRIPTION:Reminder: ' + title + ' starts in 2 hours!',
+                'END:VALARM',
+                'END:VEVENT',
+                'END:VCALENDAR'
+              ].join('\r\n');
+
+              const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = 'NehaSri_Kavinnesan_Wedding.ics';
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+              document.getElementById('cal-dropdown').classList.remove('open');
+            }
+
+            /* ─── SCROLL REVEAL ─── */
+            const obs = new IntersectionObserver(entries=>{
+              entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");obs.unobserve(e.target);}});
+            },{threshold:0.1});
+            document.querySelectorAll(".rv,.rv-l,.rv-r").forEach(el=>obs.observe(el));
+
+            /* ─── NAV ACTIVE ─── */
+            const secs = document.querySelectorAll("section[id]"), navLinks = document.querySelectorAll("nav a");
+            window.addEventListener("scroll",()=>{
+              let cur="";
+              secs.forEach(s=>{if(window.scrollY>=s.offsetTop-130) cur=s.id;});
+              navLinks.forEach(a=>{a.style.color=a.getAttribute("href")==="#"+cur?"var(--go)":"";});
+            });
+
+            /* ─── MUSIC PLAYER ─── */
+            const audio = new Audio("finalsong.wav");
+            audio.loop = true;
+            const musicBtn = document.getElementById('music-btn');
+            let isManualPause = false;
+            let musicStarted = false;
+
+            function startMusic() {
+              if (!musicStarted) {
+                audio.play().then(() => {
+                  musicBtn.classList.add('playing');
+                  musicBtn.classList.remove('paused');
+                  musicStarted = true;
+                }).catch(e => console.log("Autoplay blocked", e));
+              }
+            }
+
+            // Fallback: any click/tap on the curtain overlay also unlocks audio
+            const curtainOverlayEl = document.getElementById('curtain-overlay');
+            if (curtainOverlayEl) {
+              curtainOverlayEl.addEventListener('click', startMusic);
+              curtainOverlayEl.addEventListener('touchend', startMusic);
+            }
+
+            function toggleMusic() {
+              if (audio.paused) {
+                audio.play().catch(e => console.log("Interaction needed"));
+                musicBtn.classList.add('playing');
+                musicBtn.classList.remove('paused');
+                isManualPause = false;
+              } else {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+                musicBtn.classList.add('paused');
+                isManualPause = true;
+              }
+            }
+
+            musicBtn.addEventListener('click', toggleMusic);
+
+            /* ─── CURTAIN SLIDER ─── */
+            (function() {
+              const overlay = document.getElementById('curtain-overlay');
+              const track = document.getElementById('curtain-slider-track');
+              const thumb = document.getElementById('curtain-slider-thumb');
+              const glow = document.getElementById('curtain-slider-glow');
+              let isDragging = false;
+              let startX = 0;
+              let thumbLeft = 4;
+              const thumbSize = thumb.offsetWidth || 44;
+              const maxLeft = () => track.offsetWidth - thumbSize - 4;
+              let curtainOpened = false;
+
+              function onStart(clientX) {
+                isDragging = true;
+                startX = clientX - thumbLeft;
+                thumb.style.transition = 'none';
+                glow.style.transition = 'none';
+                // Start music on first touch of slider
+                startMusic();
+              }
+
+              function onMove(clientX) {
+                if (!isDragging) return;
+                let newLeft = clientX - startX;
+                newLeft = Math.max(4, Math.min(newLeft, maxLeft()));
+                thumbLeft = newLeft;
+                thumb.style.left = newLeft + 'px';
+                glow.style.width = (newLeft + thumbSize) + 'px';
+
+                // If dragged past 80%, open curtain
+                if (newLeft >= maxLeft() * 0.8 && !curtainOpened) {
+                  openCurtain();
+                }
+              }
+
+              function onEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                thumb.style.transition = 'left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                glow.style.transition = 'width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+
+                // If not opened curtain, snap back
+                if (!curtainOpened) {
+                  thumbLeft = 4;
+                  thumb.style.left = '4px';
+                  glow.style.width = '44px';
+                }
+              }
+
+              function openCurtain() {
+                curtainOpened = true;
+                // Immediately hide slider
+                const sliderWrap = document.getElementById('curtain-slider-wrap');
+                if (sliderWrap) sliderWrap.classList.add('disappear');
+                // Open curtains
+                overlay.classList.add('open');
+                // Quickly fade out and unlock scroll
+                setTimeout(() => {
+                  overlay.classList.add('hidden');
+                  document.body.classList.remove('curtain-locked');
+                  startAutoScroll();
+                }, 900);
+                // Remove overlay from DOM fast
+                setTimeout(() => {
+                  overlay.remove();
+                }, 1200);
+              }
+
+              // Mouse events
+              thumb.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                startMusic(); // Direct call in user gesture
+                onStart(e.clientX);
+              });
+              document.addEventListener('mousemove', (e) => onMove(e.clientX));
+              document.addEventListener('mouseup', onEnd);
+
+              // Touch events
+              thumb.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                startMusic(); // Direct call in user gesture
+                onStart(e.touches[0].clientX);
+              }, { passive: false });
+              document.addEventListener('touchmove', (e) => {
+                if (isDragging) {
+                  e.preventDefault();
+                  onMove(e.touches[0].clientX);
+                }
+              }, { passive: false });
+              document.addEventListener('touchend', onEnd);
+            })();
+
+            /* ─── AUTO SCROLL (Variable Speed) ─── */
+            let userScrolling = false;
+            let userScrollTimer = null;
+
+            function startAutoScroll() {
+              const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+              // Only start detecting manual scroll AFTER auto-scroll begins
+              function onUserScroll() {
+                userScrolling = true;
+                clearTimeout(userScrollTimer);
+                userScrollTimer = setTimeout(() => {
+                  userScrolling = false;
+                }, 2000);
+              }
+              window.addEventListener('wheel', onUserScroll, { passive: true });
+              // Use scroll event instead of touchmove to avoid conflict with slider drag
+              let lastScrollY = window.scrollY;
+              window.addEventListener('scroll', () => {
+                // Only count as user scroll if auto-scroll didn't cause it
+                if (userScrolling) return;
+              }, { passive: true });
+              window.addEventListener('touchstart', (e) => {
+                // If user touches the page (not curtain), treat subsequent scroll as manual
+                if (!document.getElementById('curtain-overlay')) {
+                  onUserScroll();
+                }
+              }, { passive: true });
+
+              function getSpeed() {
+                const hero = document.getElementById('hero');
+                const story = document.getElementById('story');
+                const events = document.getElementById('events');
+
+                const y = window.scrollY + window.innerHeight / 2;
+
+                // Hero section is extra slow
+                const inHero = (y >= hero.offsetTop && y < hero.offsetTop + hero.offsetHeight);
+                if (inHero) return 1.0;
+
+                // Story & Events are moderate
+                const inSlow = (
+                  (y >= story.offsetTop && y < story.offsetTop + story.offsetHeight) ||
+                  (y >= events.offsetTop && y < events.offsetTop + events.offsetHeight)
+                );
+                if (inSlow) return 1.6;
+
+                return 1.8;
+              }
+
+              function scrollStep() {
+                let currentPos = window.scrollY;
+                if (currentPos < totalHeight && !isManualPause) {
+                  if (!userScrolling) {
+                    currentPos += getSpeed();
+                    window.scrollTo(0, currentPos);
+                  }
+                  requestAnimationFrame(scrollStep);
+                }
+              }
+
+              requestAnimationFrame(scrollStep);
+            }
     </script>
   </body>
 </html>
