@@ -29,7 +29,7 @@
         box-sizing: border-box;
       }
       html {
-        scroll-behavior: smooth;
+        scroll-behavior: auto;
       }
       body {
         background: var(--cr);
@@ -2109,6 +2109,7 @@
         color: #ffedcc;
         text-shadow: 0 0 8px rgba(255, 237, 204, 0.6);
         letter-spacing: 6px;
+        white-space: nowrap;
         animation: jasmineSwing 4s ease-in-out infinite;
         filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
       }
@@ -3896,7 +3897,7 @@
             const audio = new Audio("finalsong.wav");
             audio.loop = true;
             const musicBtn = document.getElementById('music-btn');
-            let isManualPause = false;
+            let isMusicPaused = false;
             let musicStarted = false;
 
             function startMusic() {
@@ -3921,12 +3922,12 @@
                 audio.play().catch(e => console.log("Interaction needed"));
                 musicBtn.classList.add('playing');
                 musicBtn.classList.remove('paused');
-                isManualPause = false;
+                isMusicPaused = false;
               } else {
                 audio.pause();
                 musicBtn.classList.remove('playing');
                 musicBtn.classList.add('paused');
-                isManualPause = true;
+                isMusicPaused = true;
               }
             }
 
@@ -4025,68 +4026,36 @@
               document.addEventListener('touchend', onEnd);
             })();
 
-            /* ─── AUTO SCROLL (Variable Speed) ─── */
-            let userScrolling = false;
-            let userScrollTimer = null;
-
+            /* ─── AUTO SCROLL ─── */
             function startAutoScroll() {
-              const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+              let pos = window.scrollY;
+              let lastInteraction = 0;
+              const RESUME_DELAY = 2000; // ms after last user input before resuming
 
-              // Only start detecting manual scroll AFTER auto-scroll begins
-              function onUserScroll() {
-                userScrolling = true;
-                clearTimeout(userScrollTimer);
-                userScrollTimer = setTimeout(() => {
-                  userScrolling = false;
-                }, 2000);
+              function onUserInput() {
+                lastInteraction = Date.now();
+                pos = window.scrollY; // sync position so we resume from where user left off
               }
-              window.addEventListener('wheel', onUserScroll, { passive: true });
-              // Use scroll event instead of touchmove to avoid conflict with slider drag
-              let lastScrollY = window.scrollY;
-              window.addEventListener('scroll', () => {
-                // Only count as user scroll if auto-scroll didn't cause it
-                if (userScrolling) return;
-              }, { passive: true });
-              window.addEventListener('touchstart', (e) => {
-                // If user touches the page (not curtain), treat subsequent scroll as manual
-                if (!document.getElementById('curtain-overlay')) {
-                  onUserScroll();
+
+              window.addEventListener('wheel',       onUserInput, { passive: true });
+              window.addEventListener('touchstart',  onUserInput, { passive: true });
+              window.addEventListener('touchmove',   onUserInput, { passive: true });
+              window.addEventListener('keydown',     onUserInput, { passive: true });
+
+              function step() {
+                const idleMs = Date.now() - lastInteraction;
+                if (idleMs >= RESUME_DELAY) {
+                  // Auto-scroll: advance our own position tracker
+                  pos += 1.35;
+                  window.scrollTo(0, pos);
+                } else {
+                  // User is scrolling — keep our tracker in sync so we resume from here
+                  pos = window.scrollY;
                 }
-              }, { passive: true });
-
-              function getSpeed() {
-                const hero = document.getElementById('hero');
-                const story = document.getElementById('story');
-                const events = document.getElementById('events');
-
-                const y = window.scrollY + window.innerHeight / 2;
-
-                // Hero section is extra slow
-                const inHero = (y >= hero.offsetTop && y < hero.offsetTop + hero.offsetHeight);
-                if (inHero) return 1.0;
-
-                // Story & Events are moderate
-                const inSlow = (
-                  (y >= story.offsetTop && y < story.offsetTop + story.offsetHeight) ||
-                  (y >= events.offsetTop && y < events.offsetTop + events.offsetHeight)
-                );
-                if (inSlow) return 1.6;
-
-                return 1.8;
+                requestAnimationFrame(step);
               }
 
-              function scrollStep() {
-                let currentPos = window.scrollY;
-                if (currentPos < totalHeight && !isManualPause) {
-                  if (!userScrolling) {
-                    currentPos += getSpeed();
-                    window.scrollTo(0, currentPos);
-                  }
-                  requestAnimationFrame(scrollStep);
-                }
-              }
-
-              requestAnimationFrame(scrollStep);
+              requestAnimationFrame(step);
             }
     </script>
   </body>
