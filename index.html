@@ -648,6 +648,23 @@
         background: var(--cr);
         padding: 6px 0;
       }
+      /* gallery header should match other sections' font styling */
+      /* reset the moon-theme overrides so fonts/colors remain consistent */
+      #gallery.moon-theme .sh .sti {
+        /* use default section headline color and remove shadow */
+        color: var(--pd) !important;
+        text-shadow: none !important;
+      }
+      #gallery.moon-theme .sh .sey {
+        /* standard accent color for subtitles */
+        color: var(--go) !important;
+      }
+      #gallery.moon-theme .pc-name {
+        color: var(--go);
+      }
+      #gallery.moon-theme .pc-note {
+        color: var(--pb);
+      }
       .sb {
         margin-bottom: 44px;
       }
@@ -713,37 +730,49 @@
         overflow: hidden;
         padding: 100px 20px;
       }
+      /* Moon with a pinkish glow */
       #gallery::before {
-        content: "✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿";
+        content: "";
         position: absolute;
-        top: 18px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: rgba(192, 57, 90, 0.12);
-        font-size: 14px;
-        letter-spacing: 8px;
+        top: 60px;
+        right: 80px;
+        width: 100px;
+        height: 100px;
+        background: radial-gradient(circle at 30% 30%, #fff 20%, transparent 70%);
+        border-radius: 50%;
+        box-shadow: -15px 10px 0 0 #fff;
+        opacity: 0.85;
+        filter: blur(1px) drop-shadow(0 0 25px rgba(224, 92, 122, 0.45));
+        transform: rotate(-15deg);
+        z-index: 1;
       }
       #gallery::after {
-        content: "✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿ ❋ ✿";
+        content: "";
         position: absolute;
-        bottom: 18px;
-        left: 0;
-        right: 0;
-        text-align: center;
-        color: rgba(192, 57, 90, 0.12);
-        font-size: 14px;
-        letter-spacing: 8px;
+        inset: 0;
+        background-image: 
+          radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+          radial-gradient(1px 1px at 30% 50%, #fff, transparent),
+          radial-gradient(2px 2px at 50% 30%, #fff, transparent),
+          radial-gradient(1px 1px at 70% 80%, #fff, transparent),
+          radial-gradient(2px 2px at 90% 10%, #fff, transparent),
+          radial-gradient(1.5px 1.5px at 25% 75%, #fff, transparent),
+          radial-gradient(1px 1px at 60% 65%, #fff, transparent),
+          radial-gradient(2px 2px at 80% 40%, #fff, transparent);
+        background-size: 400px 400px;
+        opacity: 0.3;
+        z-index: 0;
       }
 
       .gallery-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: auto;
         gap: 50px;
-        max-width: 1100px;
+        max-width: 800px;
         margin: 0 auto;
         align-items: start;
+        justify-content: center;
       }
 
       .photo-frame {
@@ -761,9 +790,6 @@
         margin-top: 0;
       }
       .photo-frame:nth-child(2) {
-        margin-top: 0;
-      }
-      .photo-frame:nth-child(3) {
         margin-top: 0;
       }
 
@@ -1819,8 +1845,7 @@
           max-width: 340px;
         }
         .photo-frame:nth-child(1),
-        .photo-frame:nth-child(2),
-        .photo-frame:nth-child(3) {
+        .photo-frame:nth-child(2) {
           margin-top: 0;
         }
         #gallery {
@@ -3053,22 +3078,22 @@
               <div class="sbl">The Bride</div>
               <div class="sbn">Neha Sri S R</div>
               <div class="sbt">
-                From the serene town of Sathyamangalam, nestled at the foothills
-                of the Nilgiris, Neha Sri is a soul as genuine as the jasmine
-                she adorns. A devoted classical dancer, her every movement tells
-                a story — of devotion, of grace, of love given freely.
+                From the serene town of Sathyamangalam, Neha Sri carries a quietness that speaks louder
+                than words. Calm in her ways, gentle in her love, and fiercely
+                loyal to those she holds dear — she is the kind of soul who
+                turns ordinary moments into something worth remembering.
               </div>
             </div>
             <div class="story-tquote">
-              "நடனமாடும் போது அவள் தெய்வமாகிறாள்"<small
-                >In her dance, she becomes divine</small
+              "அமைதியில் அன்பு பேசுபவள், நம்பிக்கையில் நிலைத்தவள்"<small
+                >She speaks love through silence, and stands firm in loyalty</small
               >
             </div>
             <div class="sb" style="margin-top: 24px">
               <div class="sbl">Her Heart Says</div>
               <div class="sbt">
-                "He is steady, sincere, and home all at once. Love does not need
-                grand gestures when it is this real."
+                "He is the 11:11 wish I quitely whispered beneath the moon ,
+                 which turned into the love that feels home"
               </div>
             </div>
           </div>
@@ -3110,64 +3135,18 @@
     <!-- ══════════════════════════════════════
          PHOTO GALLERY SECTION
     ══════════════════════════════════════ -->
-    <section id="gallery">
+    <section id="gallery" class="moon-theme">
       <div class="si">
         <div class="sh rv">
-          <div class="sey">நினைவுகள் · Moments to treasure</div>
+          <div class="sey" >நினைவுகள் · Moments to treasure</div>
           <div class="sti">Our Photographs</div>
-          <div class="srl"><span>❧</span></div>
+          <div class="srl"><span style="color: var(--go)">❧</span></div>
         </div>
 
         <div class="gallery-grid">
-          <!-- Photo 1 -->
+          <!-- Photo 1 (was Photo 2) -->
           <div class="photo-frame rv d1" onclick="openLightbox(0)">
-            <!-- Replace the photo-placeholder div below with: <img src="YOUR_IMAGE.jpg" alt="Neha Sri"> -->
             <div class="photo-placeholder" id="ph-0">
-              <img
-                src="1.webp"
-                alt="Mr &amp; Mrs.K"
-                style="object-position: top"
-              />
-            </div>
-            <!-- Corner ornaments -->
-            <div class="photo-corner tl">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
-                <circle cx="20" cy="2" r="2" fill="#c9903a" />
-                <circle cx="2" cy="20" r="2" fill="#c9903a" />
-              </svg>
-            </div>
-            <div class="photo-corner tr">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
-                <circle cx="20" cy="2" r="2" fill="#c9903a" />
-                <circle cx="2" cy="20" r="2" fill="#c9903a" />
-              </svg>
-            </div>
-            <div class="photo-corner bl">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
-                <circle cx="20" cy="2" r="2" fill="#c9903a" />
-                <circle cx="2" cy="20" r="2" fill="#c9903a" />
-              </svg>
-            </div>
-            <div class="photo-corner br">
-              <svg viewBox="0 0 22 22" fill="none">
-                <path d="M2 20 Q2 2 20 2" stroke="#c9903a" stroke-width="1.5" />
-                <circle cx="20" cy="2" r="2" fill="#c9903a" />
-                <circle cx="2" cy="20" r="2" fill="#c9903a" />
-              </svg>
-            </div>
-            <div class="photo-shine"></div>
-            <div class="photo-caption">
-              <div class="pc-name">Mr &amp; Mrs.K</div>
-              <div class="pc-note">A Beautiful Moment</div>
-            </div>
-          </div>
-
-          <!-- Photo 2 (centre, offset lower) -->
-          <div class="photo-frame rv d2" onclick="openLightbox(1)">
-            <div class="photo-placeholder" id="ph-1">
               <img src="2.webp" alt="Neha Sri &amp; Kavinnesan" />
             </div>
             <div class="photo-corner tl">
@@ -3205,9 +3184,9 @@
             </div>
           </div>
 
-          <!-- Photo 3 -->
-          <div class="photo-frame rv d3" onclick="openLightbox(2)">
-            <div class="photo-placeholder" id="ph-2">
+          <!-- Photo 2 -->
+          <div class="photo-frame rv d2" onclick="openLightbox(1)">
+            <div class="photo-placeholder" id="ph-1">
               <img
                 src="3.webp"
                 alt="Neha Sri &amp; Kavinnesan"
@@ -3337,15 +3316,11 @@
             </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
-              <div class="et-name">இணைச்சீர்</div>
+              <div class="et-name">இணைச்சீர் 🌼</div>
               <div class="et-time">10:30 AM – 11:30 AM</div>
-              <div class="et-venue">
-                Inaicheer — Exchange of Gifts &amp; Garlands
-              </div>
+              <div class="et-venue">Inai Seer — Brother–Sister Blessing Ritual</div>
               <div class="et-desc">
-                A joyful ceremony of mutual exchange — both families present
-                garlands, sacred gifts, fruits, and traditional offerings,
-                celebrating unity and respect.
+                A beautiful brother–sister ritual that celebrates their cherished bond. In this ceremony, the groom's sister offers her love and blessings as he begins a new chapter in life, symbolically expressing her acceptance and heartfelt wishes for his married journey.
               </div>
             </div>
           </div>
@@ -3358,9 +3333,7 @@
                 Mappillai Azhaippu — Groom's Welcome Procession
               </div>
               <div class="et-desc">
-                The grand ceremonial procession welcoming the groom —
-                accompanied by Nadaswaram music, garlands, and the warm embrace
-                of the bride's family.
+                A joyful ceremony welcoming the groom and his family. The bride's sister receives the groom with a traditional aarti song, playful rituals, and heartfelt cheer, marking the beginning of a beautiful bond between the two families.
               </div>
             </div>
             <div class="et-dot-col">
@@ -3704,7 +3677,6 @@
     <script>
             /* ─── LIGHTBOX DATA ─── */
             const photos = [
-              { caption: "Neha Sri & Kavinnesan", sub: "A Beautiful Moment", icon: "🌸" },
               { caption: "Neha Sri & Kavinnesan", sub: "Together · Forever", icon: "💍" },
               { caption: "Neha Sri & Kavinnesan", sub: "Eternity", icon: "🪔" },
             ];
