@@ -4018,7 +4018,7 @@
                 const idleMs = Date.now() - lastInteraction;
                 if (idleMs >= RESUME_DELAY) {
                   // Auto-scroll: advance our own position tracker
-                  pos += 1.05;
+                  pos += 0.85;
                   window.scrollTo(0, pos);
                 } else {
                   // User is scrolling — keep our tracker in sync so we resume from here
