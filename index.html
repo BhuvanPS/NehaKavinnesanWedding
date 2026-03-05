@@ -500,7 +500,7 @@
         margin-bottom: 64px;
       }
       .sey {
-        font-size: 10px;
+        font-size: 12px;
         letter-spacing: 5px;
         text-transform: uppercase;
         color: var(--go);
@@ -669,11 +669,12 @@
         margin-bottom: 44px;
       }
       .sbl {
-        font-size: 10px;
+        font-size: 11px;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: var(--go);
+        color: var(--pd);
         margin-bottom: 8px;
+        font-weight: 500;
       }
       .sbn {
         font-family: "Cinzel Decorative", cursive;
@@ -1066,6 +1067,28 @@
         background: var(--pp);
         position: relative;
         overflow: hidden;
+        background-image:
+          radial-gradient(circle, rgba(201, 144, 58, 0.08) 1px, transparent 1px),
+          radial-gradient(circle, rgba(192, 57, 90, 0.06) 2px, transparent 2px);
+        background-size:
+          80px 80px,
+          120px 120px;
+        background-position:
+          0 0,
+          40px 40px;
+      }
+      #events::after {
+        content: "✧ ✦ ✧     ✦ ✧ ✦     ✧ ✦ ✧";
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: rgba(201, 144, 58, 0.12);
+        font-size: 14px;
+        letter-spacing: 20px;
+        z-index: 1;
+        pointer-events: none;
       }
       #events::before {
         content: "";
@@ -1084,6 +1107,11 @@
         );
         background-size: 200%;
         animation: gradSlide 4s linear infinite;
+        z-index: 10;
+      }
+      #events .si {
+        position: relative;
+        z-index: 5;
       }
       .events-timeline {
         display: flex;
@@ -1200,33 +1228,35 @@
         animation: floaty 3s ease-in-out infinite;
       }
       .et-day {
-        font-size: 10px;
+        font-size: 12px;
         letter-spacing: 3px;
         text-transform: uppercase;
-        color: var(--go);
+        color: var(--pd);
         margin-bottom: 4px;
+        font-weight: 500;
       }
       .et-name {
         font-family: "Cinzel Decorative", cursive;
-        font-size: 15px;
+        font-size: 16px;
         color: var(--pd);
         margin-bottom: 8px;
       }
       .et-time {
-        font-size: 12px;
+        font-size: 14px;
         letter-spacing: 2px;
         text-transform: uppercase;
-        color: var(--go);
+        color: var(--pd);
         margin-bottom: 4px;
+        font-weight: 500;
       }
       .et-venue {
-        font-size: 14px;
+        font-size: 15px;
         font-style: italic;
         color: var(--pm);
         margin-bottom: 10px;
       }
       .et-desc {
-        font-size: 14px;
+        font-size: 15px;
         line-height: 1.75;
         color: #6b3a46;
       }
@@ -3278,7 +3308,7 @@
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
             <div class="et-dot-col">
-              <div class="et-dot" style="animation-delay: 0.3s">�️</div>
+              <div class="et-dot" style="animation-delay: 0.3s">🍽️</div>
             </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
@@ -3312,7 +3342,7 @@
           <div class="et-item rv d2">
             <div class="et-spacer"></div>
             <div class="et-dot-col">
-              <div class="et-dot" style="animation-delay: 0.9s">�</div>
+              <div class="et-dot" style="animation-delay: 0.9s">💐</div>
             </div>
             <div class="et-content">
               <div class="et-day">நாள் 1 · Day 1 · 28th May 2026</div>
@@ -3373,7 +3403,7 @@
               </div>
             </div>
             <div class="et-dot-col">
-              <div class="et-dot" style="animation-delay: 1.8s">�</div>
+              <div class="et-dot" style="animation-delay: 1.8s">💒</div>
             </div>
             <div class="et-spacer"></div>
           </div>
@@ -4018,7 +4048,7 @@
                 const idleMs = Date.now() - lastInteraction;
                 if (idleMs >= RESUME_DELAY) {
                   // Auto-scroll: advance our own position tracker
-                  pos += 0.85;
+                  pos += 0.6;
                   window.scrollTo(0, pos);
                 } else {
                   // User is scrolling — keep our tracker in sync so we resume from here
